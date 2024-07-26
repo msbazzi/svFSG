@@ -525,10 +525,10 @@ def parseCTGR(filename, addFinal = False):
                     dataLine = [float(x) for x in dataLine]
                     dataGroup.append(dataLine[1:])
 
-    if addFinal:
-        dataGroup = np.loadtxt('final_segmentation.txt')
+    ''' if addFinal:
+       #dataGroup = np.loadtxt('final_segmentation.txt')
         dataGroup = interpolateSpline(dataGroup,periodic=True,numPts=1000)
-        data.append(dataGroup)
+        data.append(dataGroup) '''
 
     return np.array(data)
 

@@ -26,8 +26,8 @@ else:
     simulation_vessel.tevg = 1
     simulation_vessel.damping = 1e4
     simulation_vessel.penalty = 1e8
-    simulation_vessel.simulationExecutable = "~/svFSI-build/svFSI-build/mysvfsi"
-    simulation_vessel.setInputFileValues()
+    simulation_vessel.simulationExecutable = "/home/bazzi/repo/svFSI/build/svFSI-build/bin/svFSI"
+   #simulation_vessel.setInputFileValues()
     os.system('mkdir -p ' + simulation_vessel.outputDir)
     os.system('mkdir -p ' + 'meshIterations')
     os.system('mkdir -p ' + 'meshResults')

@@ -57,10 +57,10 @@ Add equation: struct {
    Mass damping: 10000.0
 
    LS type: GMRES {
-      Preconditioner: Trilinos-BlockJacobi
-      Max iterations: 10
+      Preconditioner:FSILS
+   Penalty parameter: 1000000000.0
       Krylov space dimension: 50
-   }
+   Mass damping: 10000.0
    
    Output: Spatial {
       Displacement: t
@@ -95,4 +95,3 @@ Add equation: struct {
    }
    
 }
-

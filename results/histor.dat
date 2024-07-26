@@ -1,0 +1,885 @@
+
+ ----------------------------------------------
+
+    SimVascular Fluid-Structure Interaction
+                   (svFSI)
+
+ ----------------------------------------------
+
+ This program comes with ABSOLUTELY NO WARRANTY
+ Compiled on 07-26-2024
+
+ Running sequentially
+ Number of meshes: 1
+ Reading mesh <lumen>
+ <VTK XML Parser> Loading file <mesh/lumen-mesh-complete/mesh-complete.mesh.vtu>
+ Checking IEN array structure for mesh <lumen>
+ Make sure corner nodes in elements are arranged 1-4 on
+      one face and 5-8 on the opposite face
+      https://vtk.org/wp-content/uploads/2015/04/file-formats.pdf
+ Number of available faces: 3
+ <VTK XML Parser> Loading file <mesh/lumen-mesh-complete/mesh-surfaces/lumen_wall.vtp>
+ <VTK XML Parser> Loading file <mesh/lumen-mesh-complete/mes Checking IEN array structure <VTK XML Parser> Loading file <mesh/lumen-mesh-complete/mesh-surfaces/lumen_inlet.vtp>
+ Number of nodes: 61134
+ Number of elements: 59040
+ <VTK XML Parser> Loading file <mesh/lumen-mesh-complete/mesh-complete.mesh.vtu>
+ <VTK XML Parser> Loading file <mesh/lumen-mesh-complete/mesh-complete.mesh.vtu>
+ Mesh data imported successfully
+ Domain size X: -4.71127 -2.59583
+ Domain size Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+main <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+main <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+--------------------- Mesh data imported successfully
+ Domain size X: -4.71127 -2.59583
+ Domain size Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Const Mesh data imported successfully
+ Domain size X: -4.71127 -2.59583
+ Domain size Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+ Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+main <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+main <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+main <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq      Mesh data imported successfully
+ Domain size X: -4.71127 -2.59583
+ Domain size Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+ Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+ Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+--------------------- Mesh data imported successfully
+ Domain size X: -4.71127 -2.59583
+ Domain size Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+4146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+--------------------- Mesh data imported successfully
+ Domain size X: -4.71127 -2.59583
+ Domain size Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+ Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+main <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+main <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri  Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+main <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+  Mesh data imported successfully
+ Domain size X: -4.71127 -2.59583
+ Domain size Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+main <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+ Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+main <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+ Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+main <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri   Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+------------------
+ New time step size: 1.000E-3
+main <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri  Total number of non-zeros in the LHS m Mesh data imported successfully
+ Domain size X: -4.71127 -2.59583
+ Domain size Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+ Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+ Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+main <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+ Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+--------------------- Mesh data imported successfully
+ Domain size X: -4.71127 -2.59583
+ Domain size Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+main <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+main <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri  Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+ Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+------------------------------------ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+main <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq      Mesh data imported successfully
+ Domain size X: -4.71127 -2.59583
+ Domain size Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+main <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+main <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+ Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+--------------------- Mesh data imported successfully
+ Domain size X: -4.71127 -2.59583
+ Domain size Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS m Mesh data imported successfully
+ Domain size X: -4.71127 -2.59583
+ Domain size Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+main <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+----------------------------------- Mesh data imported successfully
+ Domain size X: -4.71127 -2.59583
+ Domain size Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+ Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+ Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+ed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+27 -2.59583
+ Domain size Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is com    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall>  Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+main <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+ Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imp
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri  Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+ Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri  Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri  Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+
+ Y: -3.73E-1 3.936586
+ Domain size Z: 6.134E-2 4.791131
+ Number of equations: 1
+ Using linear solver: GMRES
+ Using preconditioner: FSILS
+ Number of imposed BC for equation <fluid>: 3
+ Configuration is completed successfully
+ Constructing stiffness matrix sparse structure
+ Total number of non-zeros in the LHS matrix: 1612552
+ Initializing state variables to zero
+ Eq. <NS>
+    Volume of domain <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3
+main <-1> is -9.56150
+    Area of face <lumen_wall> is 2.5284E1
+    Area of face <lumen_outlet> is 2.294146
+    Area of face <lumen_inlet> is 2.294146
+
+---------------------------------------------------------------------
+ Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
+---------------------------------------------------------------------
+ New time step size: 1.000E-3

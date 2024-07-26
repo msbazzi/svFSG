@@ -2,6 +2,7 @@ from utils import *
 import time
 from cvessel import cvessel
 import sympy
+import pyvista as pv
 
 # This class provides functionality to running an FSG simulation
 class Vessel():
@@ -48,7 +49,7 @@ class Vessel():
         self.simulationInputDirectory = kwargs.get("simulationInputDirectory", "FolderSimulationInputFiles")
         self.simulationExecutable = kwargs.get("simulationExecutable","~/svFSI-build/svFSI-build/mysvfsi")
         self.vesselName = kwargs.get("vesselName", "vessel")
-        self.resultNum = kwargs.get("resultNum",1000)
+        self.resultNum = kwargs.get("resultNum",200)
         self.resultDir = kwargs.get("resultDir","results")
         self.fluidDir = kwargs.get("fluidDir","fluid-results")
         self.outputDir = kwargs.get("outputDir","Outputs")
@@ -157,6 +158,7 @@ class Vessel():
 
     def runFluidIteration(self):
         self.updateSolid()
+        self.plot_vessel_solid()
         self.saveSolid()
         self.updateFluid()
         self.saveFluid()
@@ -180,6 +182,7 @@ class Vessel():
 
     def runFluidSolidIteration(self):
         self.updateSolid()
+        self.plot_vessel_solid()
         self.saveSolid()
         self.updateFluid()
         self.saveFluid()
@@ -227,25 +230,25 @@ class Vessel():
         os.system('rm -rf '+self.resultDir +'/*')
         if self.timeIter == 0 and self.timeStep == 0:
             if self.numProcessorsSolid is not None:
-                os.system("srun -n " + str(self.numProcessorsSolid) + " " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_systole_mm.mfs")
+                os.system("mpirun -n " + str(self.numProcessorsSolid) + " " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_systole_mm.mfs")
             else:
-                os.system("srun " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_systole_mm.mfs")
+                os.system("mpirun " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_systole_mm.mfs")
             os.system('cp ' + self.resultDir + '/result_'+str(self.resultNum)+'.vtu simulationResults/solid_systole_' + str(self.timeStep) + '.vtu')
             if self.numProcessorsSolid is not None:
-                os.system("srun -n " + str(self.numProcessorsSolid) + " " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_diastole_mm.mfs")
+                os.system("mpirun -n " + str(self.numProcessorsSolid) + " " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_diastole_mm.mfs")
             else:
-                os.system("srun " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_diastole_mm.mfs")
+                os.system("mpirun " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_diastole_mm.mfs")
             os.system('cp ' + self.resultDir + '/result_'+str(self.resultNum)+'.vtu simulationResults/solid_diastole_' + str(self.timeStep) + '.vtu')
         else:
             if self.numProcessorsSolid is not None:
-                os.system("srun -n " + str(self.numProcessorsSolid) + " " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_systole.mfs")
+                os.system("mpirun -n " + str(self.numProcessorsSolid) + " " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_systole.mfs")
             else:
-                os.system("srun " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_systole.mfs")
+                os.system("mpirun " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_systole.mfs")
             os.system('cp ' + self.resultDir + '/result_'+str(self.resultNum)+'.vtu simulationResults/solid_systole_' + str(self.timeStep) + '.vtu')
             if self.numProcessorsSolid is not None:
-                os.system("srun -n " + str(self.numProcessorsSolid) + " " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_diastole.mfs")
+                os.system("mpirun -n " + str(self.numProcessorsSolid) + " " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_diastole.mfs")
             else:
-                os.system("srun " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_diastole.mfs")
+                os.system("mpirun " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_diastole.mfs")
             os.system('cp ' + self.resultDir + '/result_'+str(self.resultNum)+'.vtu simulationResults/solid_diastole_' + str(self.timeStep) + '.vtu')
         print("Solid simulation finished.")
         return
@@ -255,14 +258,16 @@ class Vessel():
         os.system('rm -rf '+self.resultDir +'/*')
         if self.timeIter == 0 and self.timeStep == 0:
             if self.numProcessorsSolid is not None:
-                os.system("srun -n " + str(self.numProcessorsSolid) + " " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_mm.mfs")
+                os.system("mpirun -n " + str(self.numProcessorsSolid) + " " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_mm.mfs")
             else:
-                os.system("srun " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_mm.mfs")
+                print("check for the executable",self.simulationExecutable)
+                print("check for input dir", self.simulationInputDirectory)
+                os.system("mpirun " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_mm.mfs")
         else:
             if self.numProcessorsSolid is not None:
-                os.system("srun -n " + str(self.numProcessorsSolid) + " " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_aniso.mfs")
+                os.system("mpirun -n " + str(self.numProcessorsSolid) + " " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_aniso.mfs")
             else:
-                os.system("srun " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_aniso.mfs")
+                os.system("mpirun " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_aniso.mfs")
         print("Solid simulation finished.")
         os.system('cp ' + self.resultDir + '/result_'+str(self.resultNum)+'.vtu simulationResults/solid_' + str(self.timeStep) + '.vtu')
         return
@@ -270,9 +275,9 @@ class Vessel():
     def runFluid(self):
         os.system('rm -rf '+self.resultDir +'/*')
         if self.numProcessorsFluid is not None:
-            os.system("srun -n " + str(self.numProcessorsFluid) + " " + self.simulationExecutable + " " + self.simulationInputDirectory + "/input_fluid.mfs")
+            os.system("mpirun -n " + str(self.numProcessorsFluid) + " " + self.simulationExecutable + " " + self.simulationInputDirectory + "/input_fluid.mfs")
         else:
-            os.system("srun " + self.simulationExecutable + " " + self.simulationInputDirectory + "/input_fluid.mfs")
+            os.system("mpirun " + self.simulationExecutable + " " + self.simulationInputDirectory + "/input_fluid.mfs")
         with open(self.resultDir+'/histor.dat') as f:
             if 'NaN' in f.read():
                 raise RuntimeError("Simulation has NaN!")
@@ -284,14 +289,14 @@ class Vessel():
         os.system('rm -rf '+self.resultDir +'/*')
         if self.timeIter == 0 and self.timeStep == 0:
             if self.numProcessorsFluidSolid is not None:
-                os.system("srun -n " + str(self.numProcessorsFluidSolid) + " " + self.simulationExecutable + " " + self.simulationInputDirectory + "/input_mm.mfs")
+                os.system("mpirun -n " + str(self.numProcessorsFluidSolid) + " " + self.simulationExecutable + " " + self.simulationInputDirectory + "/input_mm.mfs")
             else:
-                os.system("srun " + self.simulationExecutable + " " + self.simulationInputDirectory + "/input_mm.mfs")
+                os.system("mpirun " + self.simulationExecutable + " " + self.simulationInputDirectory + "/input_mm.mfs")
         else:
             if self.numProcessorsFluidSolid is not None:
-                os.system("srun -n " + str(self.numProcessorsFluidSolid) + " " + self.simulationExecutable + " " + self.simulationInputDirectory + "/input_aniso.mfs")
+                os.system("mpirun -n " + str(self.numProcessorsFluidSolid) + " " + self.simulationExecutable + " " + self.simulationInputDirectory + "/input_aniso.mfs")
             else:
-                os.system("srun " + self.simulationExecutable + " " + self.simulationInputDirectory + "/input_aniso.mfs")
+                os.system("mpirun " + self.simulationExecutable + " " + self.simulationInputDirectory + "/input_aniso.mfs")
         with open(self.resultDir+'/histor.dat') as f:
             if 'NaN' in f.read():
                 raise RuntimeError("Simulation has NaN!")
@@ -343,7 +348,7 @@ class Vessel():
 
             defGrad_mem = []
             #Gauss point values
-            for p in range(self.nG):
+            for p in range(self.nG): #loop over the number of gauss points
 
                 defGrad = self.vesselReference.GetCellData().GetArray('defGrad').GetTuple(q)
                 defGrad_g = defGrad[p*9:(p+1)*9]
@@ -1155,7 +1160,7 @@ class Vessel():
             angle = nativeIn[3][i+1]
             lamda_prestretch = nativeIn[5][i+1]
             F_alpha_ntau_s = lamda_prestretch * np.array([0, np.sin(angle*np.pi/180.0), np.cos(angle*np.pi/180.0)])
-            sigma_alpha_ntau_s = hat_S_alpha(lamda_prestretch, nativeIn[2][2 + i*2]*10.0, nativeIn[2][3 + i*2])*np.power(F_alpha_ntau_s,2)
+            #sigma_alpha_ntau_s = hat_S_alpha(lamda_prestretch, nativeIn[2][2 + i*2]*10.0, nativeIn[2][3 + i*2])*np.power(F_alpha_ntau_s,2)
             passive_stress = passive_stress + nativeIn[7][i+1]*sigma_alpha_ntau_s
         g_e = nativeIn[2][0]*10.0
         eps_e = nativeIn[7][0]
@@ -2139,3 +2144,13 @@ class Vessel():
     def setPenalty()
 
     """
+    def plot_vessel_solid(self):
+        # Ensure self.vesselSolid is a pyvista-compatible mesh
+        if not isinstance(self.vesselSolid, pv.core.pointset.PointSet):
+            print("self.vesselSolid is not a pyvista PointSet. Cannot plot.")
+            return
+
+        plotter = pv.Plotter()
+        plotter.add_mesh(self.vesselSolid, color='lightblue', show_edges=True)
+        plotter.add_axes()
+        plotter.show()
