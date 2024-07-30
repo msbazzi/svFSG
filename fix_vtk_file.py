@@ -1,25 +1,44 @@
+import vtk
 import numpy as np
 import pyvista as pv
+import os
+
 
 # Path to the VTK file
-vtk_file = "/home/bazzi/repo/svFSIplus/tests/cases/gr/mesh/solid-mesh-complete/mesh-complete.mesh.vtp"
+simulationInputDirectory = "/home/bazzi/repo/svFSG"
+vtk_file = os.path.join(simulationInputDirectory, "mesh/solid-mesh-complete/mesh-complete.mesh.vtu")
+#vtk_file = os.path.join(simulationInputDirectory, "mesh/solid-mesh-complete/mesh-surfaces/ring_outlet.vtp")
 
-# Load the VTK file
-mesh = pv.read(vtk_file)
 
-# Check if 'GlobalElementID' exists
-if 'GlobalElementID' not in mesh.cell_data:
-    raise ValueError(f"'GlobalElementID' data not found in VTK file: {vtk_file}")
+reader = vtk.vtkXMLUnstructuredGridReader() # for vtu files    
+#reader = vtk.vtkXMLPolyDataReader() # for vtp files
+reader.SetFileName(vtk_file)
+reader.Update()
+# Get the output of the reader
+output = reader.GetOutput()
 
-# Get the 'GlobalElementID' array
-global_element_id = mesh.cell_data['GlobalElementID']
+# Assuming vol is your vtkUnstructuredGrid object
+numCells = output.GetNumberOfCells()
 
-# Check the data type and correct if necessary
-if global_element_id.dtype != np.int32:
-    print(f"Correcting 'GlobalElementID' data type from {global_element_id.dtype} to Int32")
-    global_element_id = global_element_id.astype(np.int32)
-    mesh.cell_data['GlobalElementID'] = global_element_id
+# Add CellStructureID array
+cell_structure_id_array = pv.convert_array(np.linspace(1, numCells, numCells).astype(int), name="CellStructureID")
+output.GetCellData().AddArray(cell_structure_id_array)
 
-# Save the modified VTK file
-mesh.save(vtk_file)
-print(f"Saved corrected VTK file: {vtk_file}")
+# Check if 'GlobalElementID' data exists and is of type Int32
+global_element_id_array = output.GetCellData().GetArray('GlobalElementID')
+global_element_id_array = pv.convert_array(np.array(global_element_id_array).astype(np.int32), name="GlobalElementID")
+output.GetCellData().AddArray(global_element_id_array)
+
+
+# Additional logging for debugging
+print("VTK mesh updated successfully.")
+print(f"Number of cells: {output.GetNumberOfCells()}")
+print(f"Number of points: {output.GetNumberOfPoints()}")
+
+# Save the updated VTK file
+writer = vtk.vtkXMLUnstructuredGridWriter()
+#writer = vtk.vtkXMLPolyDataWriter()
+writer.SetFileName(vtk_file)
+writer.SetInputData(output)
+writer.Write()
+

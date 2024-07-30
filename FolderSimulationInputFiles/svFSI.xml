@@ -15,8 +15,8 @@
   <Increment_in_saving_restart_files> 1 </Increment_in_saving_restart_files> 
   <Convert_BIN_to_VTK_format> 0 </Convert_BIN_to_VTK_format> 
   <Verbose> 1 </Verbose> 
-  <Warning> 0 </Warning> 
-  <Debug> 0 </Debug> 
+  <Warning> 1 </Warning> 
+  <Debug> 1 </Debug> 
 </GeneralSimulationParameters>
 
 
