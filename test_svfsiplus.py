@@ -3,7 +3,7 @@ import subprocess
 import numpy as np
 import pyvista as pv
 
-numProcessorsSolid = 2
+numProcessorsSolid = 1
 simulationExecutable = "/home/bazzi/repo/svFSIplus/build/svFSI-build/bin/svFSI"
 simulationInputDirectory = "/home/bazzi/repo/svFSG"
 vtk_file = os.path.join(simulationInputDirectory, "mesh/solid-mesh-complete/mesh-complete.mesh.vtu")
