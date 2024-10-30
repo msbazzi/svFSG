@@ -2,14 +2,14 @@
 #----------------------------------------------------------------
 Continue previous simulation: 0
 Number of spatial dimensions: 3
-Number of time steps: 1000
-Time step size: 1.0e-2
+Number of time steps: 100
+Time step size: 1.0e-4
 Spectral radius of infinite time step: 0.2
 Searched file name to trigger stop: STOP_SIM
 
 Save results to VTK format: 1
 Name prefix of saved VTK files: result
-Increment in saving VTK files: 100
+Increment in saving VTK files: 10
 Start saving after time step: 1
 Save results in folder: results
 
@@ -25,21 +25,21 @@ Debug: 0
 #----------------------------------------------------------------
 # Mesh data
 Add mesh: wall {
-   Mesh file path: mesh/solid-mesh-complete/mesh-complete.mesh.vtu
+   Mesh file path: pipe/wall-mesh-complete/mesh-complete.mesh.vtu
    Add face: wall_inlet {
-      Face file path: mesh/solid-mesh-complete/mesh-surfaces/wall_inlet.vtp
+      Face file path:  pipe/wall-mesh-complete/mesh-surfaces/inlet.vtp
    }
    Add face: wall_outlet {
-      Face file path: mesh/solid-mesh-complete/mesh-surfaces/wall_outlet.vtp
+      Face file path:  pipe/wall-mesh-complete/mesh-surfaces/outlet.vtp
    }
    Add face: wall_inner {
-      Face file path: mesh/solid-mesh-complete/mesh-surfaces/wall_inner.vtp
+      Face file path:  pipe/wall-mesh-complete/mesh-surfaces/inner.vtp
    }
    Add face: wall_outer {
-      Face file path: mesh/solid-mesh-complete/mesh-surfaces/wall_outer.vtp
+      Face file path:  pipe/wall-mesh-complete/mesh-surfaces/outer.vtp
    }
-  Number of variable wall properties: 98
-  Variable wall properties file path: mesh/solid-mesh-complete/mesh-complete.mesh.vtu
+  #Number of variable wall properties: 98
+  #Variable wall properties file path:  pipe/wall-mesh-complete/mesh-complete.mesh.vtu
 }
 
 #----------------------------------------------------------------
@@ -50,18 +50,18 @@ Add equation: struct {
    Max iterations: 20
    Tolerance: 1e-4
 
-   Constitutive model: mm
-   #Dilational penalty model: M94
-   Penalty parameter: 500000000.0
+   Constitutive model: nHK
+   Elasticity modulus:  2.5e6                    # (epsilon - inf)
+   Poisson ratio:       0.35                     # [0.0 - 0.5)
+   Dilational penalty model: M94
+   Penalty parameter: 50000.0
    Density: 0.0
    Mass damping: 10000.0
 
    LS type: GMRES {
       Preconditioner:FSILS
-   Penalty parameter: 1000000000.0
       Krylov space dimension: 50
-   Mass damping: 10000.0
-   
+   }
    Output: Spatial {
       Displacement: t
       Velocity: t
@@ -91,7 +91,7 @@ Add equation: struct {
    Add BC: wall_inner {
       Type: Neu
       Time dependence: Spatial
-      Spatial values file path: mesh/solid-mesh-complete/mesh-surfaces/wall_inner.vtp
+      Spatial values file path: pipe/wall-mesh-complete/mesh-surfaces/inner.vtp
    }
    
 }

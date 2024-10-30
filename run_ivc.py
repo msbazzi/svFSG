@@ -16,13 +16,13 @@ def loadVessel():
 os.system("mpiexec python3 utils_init_vessel.py")
 startTime = time.time()
 
-if os.path.exists('vessel.pickle'):
+''' if os.path.exists('vessel.pickle'):
     simulation_vessel = loadVessel()
     simulation_vessel.startTime = simulation_vessel.currTime
-else:
-    simulation_vessel = vessel.Vessel(radius=0.8573, thickness=0.0743, length=0.8573, numLen=4, numCirc=24, numRad=4)
-    simulation_vessel.gnr_step_size = 4.0
-    #simulation_vessel.inletFlow = 1.2*simulation_vessel.inletFlow
+else: '''
+simulation_vessel = vessel.Vessel(radius=0.8573, thickness=0.0743, length=0.8573, numLen=4, numCirc=24, numRad=4)
+simulation_vessel.gnr_step_size = 4.0
+'''    #simulation_vessel.inletFlow = 1.2*simulation_vessel.inletFlow
     #simulation_vessel.outletPressure = (1/1.2)*simulation_vessel.outletPressure
     #simulation_vessel.adaptiveMesh = True
     #simulation_vessel.tevg = 1
@@ -31,14 +31,14 @@ else:
     simulation_vessel.tolerance = 1e-4
     simulation_vessel.numProcessorsSolid = 4
     simulation_vessel.numProcessorsFluid = 4
-    simulation_vessel.simulationExecutable = "/home/bazzi/repo/svFSI/build/svFSI-build/bin/svFSI"
-    simulation_vessel.setInputFileValues()
-    os.system('mkdir -p ' + simulation_vessel.outputDir)
-    os.system('mkdir -p ' + 'meshIterations')
-    os.system('mkdir -p ' + 'meshResults')
-    os.system('mkdir -p ' + 'simulationResults')
-    os.system('mkdir -p ' + 'materialResults')
-    simulation_vessel.initializeVessel()
+    simulation_vessel.simulationExecutable = "/home/bazzi/repo/svFSIplus/build/svFSI-build/bin/svFSI" '''
+simulation_vessel.setInputFileValues()
+os.system('mkdir -p ' + simulation_vessel.outputDir)
+os.system('mkdir -p ' + 'meshIterations')
+os.system('mkdir -p ' + 'meshResults')
+os.system('mkdir -p ' + 'simulationResults')
+os.system('mkdir -p ' + 'materialResults')
+simulation_vessel.initializeVessel()
 
 while simulation_vessel.timeStep < simulation_vessel.total_time_steps:
     while simulation_vessel.residual > simulation_vessel.tolerance or simulation_vessel.timeIter < 3:

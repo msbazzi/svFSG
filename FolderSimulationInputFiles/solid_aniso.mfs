@@ -25,21 +25,21 @@ Debug: 0
 #----------------------------------------------------------------
 # Mesh data
 Add mesh: wall {
-   Mesh file path: mesh/solid-mesh-complete/mesh-complete.mesh.vtu
+   Mesh file path: pipe/wall-mesh-complete/mesh-complete.mesh.vtu
    Add face: wall_inlet {
-      Face file path: mesh/solid-mesh-complete/mesh-surfaces/wall_inlet.vtp
+      Face file path:  pipe/wall-mesh-complete/mesh-surfaces/inlet.vtp
    }
    Add face: wall_outlet {
-      Face file path: mesh/solid-mesh-complete/mesh-surfaces/wall_outlet.vtp
+      Face file path:  pipe/wall-mesh-complete/mesh-surfaces/outlet.vtp
    }
    Add face: wall_inner {
-      Face file path: mesh/solid-mesh-complete/mesh-surfaces/wall_inner.vtp
+      Face file path:  pipe/wall-mesh-complete/mesh-surfaces/inner.vtp
    }
    Add face: wall_outer {
-      Face file path: mesh/solid-mesh-complete/mesh-surfaces/wall_outer.vtp
+      Face file path:  pipe/wall-mesh-complete/mesh-surfaces/outer.vtp
    }
-  Number of variable wall properties: 360
-  Variable wall properties file path: mesh/solid-mesh-complete/mesh-complete.mesh.vtu
+  #Number of variable wall properties: 180
+  #Variable wall properties file path:  pipe/wall-mesh-complete/mesh-complete.mesh.vtu
 }
 
 #----------------------------------------------------------------
@@ -50,8 +50,11 @@ Add equation: struct {
    Max iterations: 20
    Tolerance: 1e-4
 
-   Constitutive model: anisotropic
-   Penalty parameter: 750000000.0
+   Constitutive model: nHK
+   Elasticity modulus:  2.5e6                    # (epsilon - inf)
+   Poisson ratio:       0.35                     # [0.0 - 0.5)
+   Dilational penalty model: M94
+   Penalty parameter: 5000000.0
    Density: 0.0
    Mass damping: 10000.0
 
@@ -90,7 +93,8 @@ Add equation: struct {
    Add BC: wall_inner {
       Type: Neu
       Time dependence: Spatial
-      Spatial values file path: mesh/solid-mesh-complete/mesh-surfaces/wall_inner.vtp
+      Spatial values file path: pipe/wall-mesh-complete/mesh-surfaces/inner.vtp
    }
  
 }
+

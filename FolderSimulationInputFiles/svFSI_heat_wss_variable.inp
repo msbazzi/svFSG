@@ -1,0 +1,77 @@
+#----------------------------------------------------------------
+# General simulation parameters
+
+Continue previous simulation: 0
+Number of spatial dimensions: 3
+Number of time steps: 50
+Time step size: 0.01
+Spectral radius of infinite time step: 0.50
+Searched file name to trigger stop: STOP_SIM
+
+Save results to VTK format: 1
+Name prefix of saved VTK files: result
+Increment in saving VTK files: 2
+Start saving after time step: 1
+
+Increment in saving restart files: 2
+Convert BIN to VTK format: 0
+
+Verbose: 1
+Warning: 0
+Debug: 0
+
+#----------------------------------------------------------------
+# Mesh data
+Add mesh: msh {
+   Mesh file path:    /home/bazzi/repo/svFSG/pipe/wall-mesh-complete/mesh-complete.mesh.vtu
+   Add face: wall_inlet {
+      Face file path: /home/bazzi/repo/svFSG/pipe/wall-mesh-complete/mesh-surfaces/inlet.vtp
+   }
+   Add face: wall_outlet {
+      Face file path: /home/bazzi/repo/svFSG/pipe/wall-mesh-complete/mesh-surfaces/outlet.vtp
+   }
+   Add face: wall_outer {
+      Face file path: /home/bazzi/repo/svFSG/pipe/wall-mesh-complete/mesh-surfaces/outer.vtp
+   }
+   Add face: wall_inner {
+      Face file path: /home/bazzi/repo/svFSG/pipe/wall-mesh-complete/mesh-surfaces/inner.vtp
+   }
+}
+
+#----------------------------------------------------------------
+# Equations
+Add equation: heatS {
+   Coupled: 1
+   Min iterations: 3
+   Max iterations: 10
+   Tolerance: 1e-3
+  
+   Density: 1.06
+   Conductivity: 10
+   Source term: 0.0
+
+   Output: Spatial {
+      Temperature: t
+      Heat_flux: t
+   }
+
+   LS type: CG
+   {
+      Max iterations:      10
+      Tolerance:           1D-3
+      Krylov space dimension: 50
+   }
+
+   
+   Add BC: wall_outer {
+      Type: Dir
+      Time dependence: Steady
+      Value: 0.0
+   }
+ 
+   Add BC: wall_inner {
+      Type: Dir
+      Time dependence: Spatial
+      Spatial value file path: /home/bazzi/repo/svFSG/simulationResults/wss.vtp
+   }
+}

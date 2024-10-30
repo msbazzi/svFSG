@@ -1,0 +1,70 @@
+import numpy as np
+import pyvista as pv
+import vtk
+import os
+import sys
+
+
+def create_varProp_array(vtu_mesh, output_file, configuration_file):
+    
+
+
+        print("Initializing sheep model...")
+
+        #Read in the vtu file
+        vol = pv.read(vtu_mesh) 
+
+        # Get the number of elements (cells)
+        num_elements = vol.n_cells
+        
+        with open(configuration_file) as f:
+            lines = f.readlines()[1:]
+            nativeIn = []
+            for line in lines:
+                nativeIn.append([float(x) for x in line.split()])
+
+
+        #Build material array (constant for now)
+        # nativeIn[7][0] = phi_e 
+        materialArray = [ nativeIn[7][0],nativeIn[4][0],nativeIn[4][1],nativeIn[4][2],nativeIn[2][0]*10.0,0,0,0,0,0,0,0,0,0,\
+                          nativeIn[7][2],nativeIn[5][2],nativeIn[2][4]*10.0,nativeIn[2][5],0,0,0,0,0,0,0,0,0,0,\
+                          nativeIn[7][3],nativeIn[5][3],nativeIn[2][6]*10.0,nativeIn[2][7],0,0,0,0,0,0,0,0,0,0,\
+                          nativeIn[7][4],nativeIn[5][4],nativeIn[2][8]*10.0,nativeIn[2][9],0,0,0,0,0,0,0,0,0,0,\
+                          nativeIn[7][5],nativeIn[5][5],nativeIn[2][10]*10.0,nativeIn[2][11],0,0,0,0,0,0,0,0,0,0,\
+                          nativeIn[7][1],nativeIn[5][1],nativeIn[2][2]*10.0,nativeIn[2][3],0,0,0,0,0,0,0,0,0,0,\
+                          nativeIn[7][2],nativeIn[16][0],nativeIn[14][2],nativeIn[14][1],0,0,0,0,0,0,0,0,0,0]
+
+        #********************
+        ang1 = nativeIn[3][4]
+        ang2 = nativeIn[3][5]
+
+       
+        e_ma = np.zeros(num_elements,len(materialArray))
+        #e_ma () = materialArray
+       
+       
+        numCells = vol.GetNumberOfCells()
+        vol.GetCellData().AddArray(pv.convert_array(e_ma.astype(float),name="varWallProps"))
+
+        #Write the vtu file
+        vol.save(output_file)
+  
+        print("Sheep model initialized.")
+        return output_file
+
+
+def main(vtu_mesh, output_file,configuration_file):
+    create_varProp_array(vtu_mesh, output_file, configuration_file)
+
+if __name__ == "__main__":
+    
+    simulation_executable = "/home/bazzi/repo/svFSIplus/build/svFSI-build/bin/svFSI"
+    configuration_file = "/home/bazzi/repo/svFSG/FolderVesselConfigurationFiles/Native_in_handshake_"
+    Input_file = "/home/bazzi/repo/svFSG/FolderSimulationInputFiles/svFSI.xml"
+    vtu_mesh = os.path.join(os.getcwd(), "mesh/solid-mesh-complete/mesh-complete.mesh.vtu")
+    output_file = os.path.join(os.getcwd(), "mesh/solid-mesh-complete/mesh-complete-new.mesh.vtu")
+      
+    main(vtu_mesh, output_file, configuration_file)
+
+    # Run the simulation
+    os.system( "mpirun -n 1" + simulation_executable + " " + Input_file + " -m " + output_file)

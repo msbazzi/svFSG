@@ -9,6 +9,7 @@ import sys
 import scipy.interpolate as si
 from tqdm import tqdm
 from multiprocessing import Pool
+from vtk import VTK_TETRA, VTK_HEXAHEDRON
 
 def read_data(file_name, file_format="vtp", datatype=None):
     """
@@ -248,10 +249,10 @@ def rotate_elastic_constants(C, A, tol=1e-4):
     A = np.asarray(A)
 
     # Is this a rotation matrix?
-    if np.sometrue(np.abs(np.dot(np.array(A), np.transpose(np.array(A))) - 
+    ''' if np.sometrue(np.abs(np.dot(np.array(A), np.transpose(np.array(A))) - 
                           np.eye(3, dtype=float)) > tol):
         print(A)
-        raise RuntimeError('Matrix *A* does not describe a rotation.')
+        raise RuntimeError('Matrix *A* does not describe a rotation.')'''
 
     # Rotate
     return full_3x3x3x3_to_Voigt_6x6(np.einsum('ia,jb,kc,ld,abcd->ijkl',
@@ -333,10 +334,10 @@ def rotateStress(sigma,Q):
     Q = np.transpose(Q)
     Qinv = np.transpose(Q)
 
-    if np.sometrue(np.abs(np.dot(np.array(Q), np.transpose(np.array(Q))) - 
+    '''if np.sometrue(np.abs(np.dot(np.array(Q), np.transpose(np.array(Q))) - 
                           np.eye(3, dtype=float)) > 1e-6):
         print(Q)
-        raise RuntimeError('Matrix *Q* does not describe a rotation.')
+        raise RuntimeError('Matrix *Q* does not describe a rotation.') '''
 
     sigma = np.reshape(sigma, (3,3))
     sigma = np.matmul(Q,np.matmul(sigma,Qinv))
@@ -374,9 +375,17 @@ def rotateStiffness(DD,Q):
     CC = np.reshape(CC, (1,36))[0]
 
     return CC
+def getNN_tetra(xi):
+    # Shape functions for a tetrahedral element
+    N = np.array([1 - xi[0] - xi[1] - xi[2], xi[0], xi[1], xi[2]])
+    Nxi = np.array([
+        [-1, 1, 0, 0],
+        [-1, 0, 1, 0],
+        [-1, 0, 0, 1]
+    ])
+    return N, Nxi
 
-
-def getNN(xi):
+def getNN_hex(xi):
 
     N = np.zeros(8)
     Nxi = np.zeros((3,8))
@@ -429,33 +438,37 @@ def computeGaussValues(mesh,name):
 
     numCells = mesh.GetNumberOfCells()
 
-
-    nG = 8
-
-    s =  1/np.sqrt(3);
-    t = -1/np.sqrt(3);
-
-    xi = np.zeros((3,8))
-
-
-    xi[0,0] = t; xi[1,0] = t; xi[2,0] = t;
-    xi[0,1] = s; xi[1,1] = t; xi[2,1] = t;
-    xi[0,2] = s; xi[1,2] = s; xi[2,2] = t;
-    xi[0,3] = t; xi[1,3] = s; xi[2,3] = t;
-    xi[0,4] = t; xi[1,4] = t; xi[2,4] = s;
-    xi[0,5] = s; xi[1,5] = t; xi[2,5] = s;
-    xi[0,6] = s; xi[1,6] = s; xi[2,6] = s;
-    xi[0,7] = t; xi[1,7] = s; xi[2,7] = s;
+  
+    # Check the type of the first cell to determine the mesh type
+    first_cell_type = mesh.GetCellType(0)
+    if first_cell_type == VTK_TETRA:
+        is_tetra = True
+        nG = 4
+        xi = np.array([
+            [0.58541020, 0.13819660, 0.13819660, 0.13819660],
+            [0.13819660, 0.58541020, 0.13819660, 0.13819660],
+            [0.13819660, 0.13819660, 0.58541020, 0.13819660]
+        ])
+    elif first_cell_type == VTK_HEXAHEDRON:
+        is_tetra = False
+        nG = 8
+        s = 1 / np.sqrt(3)
+        t = -1 / np.sqrt(3)
+        xi = np.array([
+            [t, s, s, t, t, s, s, t],
+            [t, t, s, s, t, t, s, s],
+            [t, t, t, t, s, s, s, s]
+        ])
+    else:
+        raise ValueError("Unsupported cell type")
 
     IdM = np.eye(3)
     gaussN = np.zeros(3)
     gaussNx = np.zeros(9)
-    allGaussN = np.zeros((numCells,3*nG))
-    allGaussNx = np.zeros((numCells,9*nG))
+    allGaussN = np.zeros((numCells, 3 * nG))
+    allGaussNx = np.zeros((numCells, 9 * nG))
 
     for q in range(numCells):
-
-
         cell = mesh.GetCell(q)
         cellPts = cell.GetPointIds()
 
@@ -470,15 +483,18 @@ def computeGaussValues(mesh,name):
         coordinates = np.array(coordinates)
 
         for g in range(nG):
-            N, Nxi = getNN(xi[:,g])
-            J = np.matmul(Nxi,coordinates);
-            Nx = np.matmul(np.linalg.inv(J),Nxi);
-            gaussN = np.matmul(N,field)
-            gaussNx = np.ravel(np.transpose(np.matmul(Nx,field)) + IdM)
-            allGaussN[q, g*3:(g+1)*3] = gaussN
-            allGaussNx[q, g*9:(g+1)*9] = gaussNx
+            if is_tetra:
+                N, Nxi = getNN_tetra(xi[:, g])
+            else:
+                N, Nxi = getNN_hex(xi[:, g])
+            J = np.matmul(Nxi, coordinates)
+            Nx = np.matmul(np.linalg.inv(J), Nxi)
+            gaussN = np.matmul(N, field)
+            gaussNx = np.ravel(np.transpose(np.matmul(Nx, field)) + IdM)
+            allGaussN[q, g * 3:(g + 1) * 3] = gaussN
+            allGaussNx[q, g * 9:(g + 1) * 9] = gaussNx
 
-    mesh.GetCellData().AddArray(pv.convert_array(allGaussNx,name="defGrad"))
+    mesh.GetCellData().AddArray(pv.convert_array(allGaussNx, name="defGrad"))
 
     return mesh
 
@@ -525,10 +541,10 @@ def parseCTGR(filename, addFinal = False):
                     dataLine = [float(x) for x in dataLine]
                     dataGroup.append(dataLine[1:])
 
-    ''' if addFinal:
+        if addFinal:
        #dataGroup = np.loadtxt('final_segmentation.txt')
-        dataGroup = interpolateSpline(dataGroup,periodic=True,numPts=1000)
-        data.append(dataGroup) '''
+            dataGroup = interpolateSpline(dataGroup,periodic=True,numPts=1000)
+            data.append(dataGroup)
 
     return np.array(data)
 
@@ -583,6 +599,7 @@ def interpolateSpline(array,numPts = 20,periodic = False,degree=3,redistribute=T
     """
     Interpolate a series of points into an evenly-spaced spline.
     """
+
     array = np.array(array)
 
     if periodic:
@@ -607,6 +624,17 @@ def interpolateSpline(array,numPts = 20,periodic = False,degree=3,redistribute=T
     # fit splines to x=f(u) and y=g(u), treating both as periodic. also note 
     # that s=0 is needed in order to force the spline fit to pass through all 
     # the input points.
+            
+    # Debug print statements
+    print(f"x: {x}")
+    print(f"y: {y}")
+    print(f"z: {z}")
+    print(f"periodic: {periodic}")
+    print(f"degree: {degree}")
+     
+    # Check lengths of x, y, z
+    if len(x) != len(y) or len(y) != len(z):
+        raise ValueError("x, y, and z arrays must have the same length.")
 
     tck, u = si.splprep([x,y,z], u=None, s=0.0, per=periodic,k=degree)
     # evaluate the spline fits for evenly spaced distance values

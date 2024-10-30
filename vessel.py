@@ -1075,15 +1075,15 @@ class Vessel():
         vol.dimensions = [self.numRad+1, self.numCirc+1, self.numLen+1]
 
         numCells = vol.GetNumberOfCells()
-        vol.GetPointData().AddArray(pv.convert_array((proximalIds).astype(int),name="ProximalRegionID"))
-        vol.GetPointData().AddArray(pv.convert_array((distalIds).astype(int),name="DistalRegionID"))
-        vol.GetPointData().AddArray(pv.convert_array((innerIds).astype(int),name="InnerRegionID"))
-        vol.GetPointData().AddArray(pv.convert_array((outerIds).astype(int),name="OuterRegionID"))
-        vol.GetPointData().AddArray(pv.convert_array((structureIds).astype(int),name="StructureID"))
-        vol.GetCellData().AddArray(pv.convert_array(np.linspace(1,numCells,numCells).astype(int),name="GlobalElementID"))
-        vol.GetCellData().AddArray(pv.convert_array(np.linspace(1,numCells,numCells).astype(int),name="CellStructureID"))
+        vol.GetPointData().AddArray(pv.convert_array((proximalIds).astype(np.int32),name="ProximalRegionID"))
+        vol.GetPointData().AddArray(pv.convert_array((distalIds).astype(np.int32),name="DistalRegionID"))
+        vol.GetPointData().AddArray(pv.convert_array((innerIds).astype(np.int32),name="InnerRegionID"))
+        vol.GetPointData().AddArray(pv.convert_array((outerIds).astype(np.int32),name="OuterRegionID"))
+        vol.GetPointData().AddArray(pv.convert_array((structureIds).astype(np.int32),name="StructureID"))
+        vol.GetCellData().AddArray(pv.convert_array(np.linspace(1,numCells,numCells).astype(np.int32),name="GlobalElementID"))
+        vol.GetCellData().AddArray(pv.convert_array(np.linspace(1,numCells,numCells).astype(np.int32),name="CellStructureID"))
         vol.GetCellData().AddArray(pv.convert_array(e_ma.astype(float),name="varWallProps"))
-        vol.GetPointData().AddArray(pv.convert_array((sliceIds).astype(int),name="sliceIds"))
+        vol.GetPointData().AddArray(pv.convert_array((sliceIds).astype(np.int32),name="sliceIds"))
 
         #Exchange these to gauss point quantities
         #Matrices/arrays
@@ -1113,15 +1113,15 @@ class Vessel():
         vol.GetCellData().AddArray(pv.convert_array(e_t.astype(float),name="e_t"))
         vol.GetCellData().AddArray(pv.convert_array(e_z.astype(float),name="e_z"))
         vol.GetCellData().AddArray(pv.convert_array(e_ma.astype(float),name="material_global"))
-        vol.GetCellData().AddArray(pv.convert_array(fluidStressQueryIds.astype(int),name="fluidStressQueryID"))
-        vol.GetCellData().AddArray(pv.convert_array(solidStressQueryIds.astype(int),name="solidStressQueryID"))
-        vol.GetCellData().AddArray(pv.convert_array(simulateIds.astype(int),name="Simulate"))
+        vol.GetCellData().AddArray(pv.convert_array(fluidStressQueryIds.astype(np.int32),name="fluidStressQueryID"))
+        vol.GetCellData().AddArray(pv.convert_array(solidStressQueryIds.astype(np.int32),name="solidStressQueryID"))
+        vol.GetCellData().AddArray(pv.convert_array(simulateIds.astype(np.int32),name="Simulate"))
         vol.GetCellData().AddArray(pv.convert_array(aneurysmValue.astype(float),name="aneurysmValue"))
         vol.GetCellData().AddArray(pv.convert_array(tevgValue.astype(float),name="tevgValue"))
         vol = vol.cast_to_unstructured_grid()
         vol = clean(vol, tolerance=1e-10)
         numPts = vol.GetNumberOfPoints()
-        vol.GetPointData().AddArray(pv.convert_array(np.linspace(1,numPts,numPts).astype(int),name="GlobalNodeID"))
+        vol.GetPointData().AddArray(pv.convert_array(np.linspace(1,numPts,numPts).astype(np.int32),name="GlobalNodeID"))
         vol.GetPointData().AddArray(pv.convert_array(np.tile(np.zeros(3),(numPts,1)).astype(float),name="displacements"))
         vol.GetPointData().AddArray(pv.convert_array(np.tile(np.zeros(3),(numPts,1)).astype(float),name="residual_curr"))
         vol.GetPointData().AddArray(pv.convert_array(np.tile(np.zeros(3),(numPts,1)).astype(float),name="residual_prev"))
@@ -1296,15 +1296,15 @@ class Vessel():
         vol.dimensions = [self.numRad+1, self.numCirc+1, self.numLen+1]
 
         numCells = vol.GetNumberOfCells()
-        vol.GetPointData().AddArray(pv.convert_array((proximalIds).astype(int),name="ProximalRegionID"))
-        vol.GetPointData().AddArray(pv.convert_array((distalIds).astype(int),name="DistalRegionID"))
-        vol.GetPointData().AddArray(pv.convert_array((innerIds).astype(int),name="InnerRegionID"))
-        vol.GetPointData().AddArray(pv.convert_array((outerIds).astype(int),name="OuterRegionID"))
-        vol.GetPointData().AddArray(pv.convert_array((structureIds).astype(int),name="StructureID"))
-        vol.GetCellData().AddArray(pv.convert_array(np.linspace(1,numCells,numCells).astype(int),name="GlobalElementID"))
-        vol.GetCellData().AddArray(pv.convert_array(np.linspace(1,numCells,numCells).astype(int),name="CellStructureID"))
+        vol.GetPointData().AddArray(pv.convert_array((proximalIds).astype(np.int32),name="ProximalRegionID"))
+        vol.GetPointData().AddArray(pv.convert_array((distalIds).astype(np.int32),name="DistalRegionID"))
+        vol.GetPointData().AddArray(pv.convert_array((innerIds).astype(np.int32),name="InnerRegionID"))
+        vol.GetPointData().AddArray(pv.convert_array((outerIds).astype(np.int32),name="OuterRegionID"))
+        vol.GetPointData().AddArray(pv.convert_array((structureIds).astype(np.int32),name="StructureID"))
+        vol.GetCellData().AddArray(pv.convert_array(np.linspace(1,numCells,numCells).astype(np.int32),name="GlobalElementID"))
+        vol.GetCellData().AddArray(pv.convert_array(np.linspace(1,numCells,numCells).astype(np.int32),name="CellStructureID"))
         vol.GetCellData().AddArray(pv.convert_array(e_ma.astype(float),name="varWallProps"))
-        vol.GetPointData().AddArray(pv.convert_array((sliceIds).astype(int),name="sliceIds"))
+        vol.GetPointData().AddArray(pv.convert_array((sliceIds).astype(np.int32),name="sliceIds"))
 
         #Exchange these to gauss point quantities
         #Matrices/arrays
@@ -1334,15 +1334,15 @@ class Vessel():
         vol.GetCellData().AddArray(pv.convert_array(e_t.astype(float),name="e_t"))
         vol.GetCellData().AddArray(pv.convert_array(e_z.astype(float),name="e_z"))
         vol.GetCellData().AddArray(pv.convert_array(e_ma.astype(float),name="material_global"))
-        vol.GetCellData().AddArray(pv.convert_array(fluidStressQueryIds.astype(int),name="fluidStressQueryID"))
-        vol.GetCellData().AddArray(pv.convert_array(solidStressQueryIds.astype(int),name="solidStressQueryID"))
-        vol.GetCellData().AddArray(pv.convert_array(simulateIds.astype(int),name="Simulate"))
+        vol.GetCellData().AddArray(pv.convert_array(fluidStressQueryIds.astype(np.int32),name="fluidStressQueryID"))
+        vol.GetCellData().AddArray(pv.convert_array(solidStressQueryIds.astype(np.int32),name="solidStressQueryID"))
+        vol.GetCellData().AddArray(pv.convert_array(simulateIds.astype(np.int32),name="Simulate"))
         vol.GetCellData().AddArray(pv.convert_array(aneurysmValue.astype(float),name="aneurysmValue"))
         vol.GetCellData().AddArray(pv.convert_array(tevgValue.astype(float),name="tevgValue"))
         vol = vol.cast_to_unstructured_grid()
         vol = clean(vol, tolerance=1e-10)
         numPts = vol.GetNumberOfPoints()
-        vol.GetPointData().AddArray(pv.convert_array(np.linspace(1,numPts,numPts).astype(int),name="GlobalNodeID"))
+        vol.GetPointData().AddArray(pv.convert_array(np.linspace(1,numPts,numPts).astype(np.int32),name="GlobalNodeID"))
         vol.GetPointData().AddArray(pv.convert_array(np.tile(np.zeros(3),(numPts,1)).astype(float),name="displacements"))
         vol.GetPointData().AddArray(pv.convert_array(np.tile(np.zeros(3),(numPts,1)).astype(float),name="residual_curr"))
         vol.GetPointData().AddArray(pv.convert_array(np.tile(np.zeros(3),(numPts,1)).astype(float),name="residual_prev"))
@@ -1660,7 +1660,7 @@ class Vessel():
         print("Initializing segmented vessel...")
 
         #Store ctgr slice points
-        ctgrPtsInner = parseCTGR(self.segmentationName+'_inner.ctgr', addFinal = True)
+        ctgrPtsInner = parseCTGR(self.segmentationName+'_inner.ctgr', addFinal = False)
         numSegsInner = np.shape(ctgrPtsInner)[0]
 
         for i in range(np.shape(ctgrPtsInner)[0]):

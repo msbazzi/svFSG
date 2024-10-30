@@ -29,7 +29,7 @@ else:
     simulation_vessel.damping = 1e7
     simulation_vessel.penalty = 1e9
     simulation_vessel.tolerance = 1e-3
-    simulation_vessel.simulationExecutable = "~/svFSI-build/svFSI-build/mysvfsi"
+    simulation_vessel.simulationExecutable ="/home/bazzi/repo/svFSI/build/svFSI-build/bin/svFSI"
     simulation_vessel.setInputFileValues()
     simulation_vessel.numProcessorsSolid = 72
     simulation_vessel.smoothAttributesValue = 0.1

@@ -1,3 +1,0 @@
- lumen_inlet  lumen_outlet  lumen_wall 
- 2.957e+00  2.973e+00  4.644e+01 
-

@@ -14,8 +14,8 @@
   <Increment_in_saving_restart_files> 1 </Increment_in_saving_restart_files> 
   <Convert_BIN_to_VTK_format> 0 </Convert_BIN_to_VTK_format> 
   <Verbose> 1 </Verbose> 
-  <Warning> 0 </Warning> 
-  <Debug> 0 </Debug> 
+  <Warning> 1 </Warning> 
+  <Debug> 1 </Debug> 
 </GeneralSimulationParameters>
 
 #----------------------------------------------------------------
@@ -34,20 +34,22 @@
       <Face_file_path> mesh/solid-mesh-complete/mesh-surfaces/wall_outer.vtp </Face_file_path>
   </Add_face>
 
+  <Number_variable_wall_properties> 98 </Number_variable_wall_properties> 
+  <Variable_wall_properties_file_path> mesh/solid-mesh-complete/mesh-complete.mesh.vtu </Variable_wall_properties_file_path>
+
 </Add_mesh>
 
-<Add_equation type="struct" > 
+<Add_equation type="ustruct" > 
 
    <Coupled> true </Coupled>
    <Min_iterations> 2 </Min_iterations>  
-   <Max_iterations> 10 </Max_iterations> 
-   <Tolerance> 1e-9 </Tolerance> 
+   <Max_iterations> 20 </Max_iterations> 
+   <Tolerance> 1e-4 </Tolerance> 
 
    <Density> 1.0 </Density>                           <!-- g/cm^3 -->
    <Elasticity_modulus> 1.0e5 </Elasticity_modulus>   <!-- dyne/cm^2 -->
    <Poisson_ratio> 0.483333 </Poisson_ratio>
-   <Constitutive_model type="neoHookean"> 
-      </Constitutive_model> 
+   <!-- <Constitutive_model type="aniso"> </Constitutive_model> -->
    <Dilational_penalty_model> ST91 </Dilational_penalty_model>
    <Viscosity model="Constant" >
          <Value> 0.0 </Value>
@@ -76,10 +78,8 @@
 
    <Add_BC name="wall_inner" > 
       <Type> Neu </Type> 
-      <Time_dependence> Unsteady </Time_dependence> 
-      <Temporal_values_file_path> mesh/solid-mesh-complete/mesh-surfaces/wall_inner.vtp </Temporal_values_file_path> 
-      <Ramp_function> true </Ramp_function> 
-      <Follower_pressure_load> true </Follower_pressure_load> 
+      <Time_dependence> Spatial </Time_dependence> 
+      <Spatial_values_file_path> mesh/solid-mesh-complete/mesh-surfaces/wall_inner.vtp </Spatial_values_file_path> 
    </Add_BC> 
    
    <Add_BC name="wall_inlet" > 

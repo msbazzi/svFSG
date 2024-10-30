@@ -40,32 +40,36 @@
   <Add_face name="wall_outer">
       <Face_file_path> /home/bazzi/repo/svFSG/mesh/solid-mesh-complete/mesh-surfaces/wall_outer.vtp </Face_file_path>
   </Add_face>
-  <Number_variable_wall_properties> 360</Number_variable_wall_properties>
+  <Number_variable_wall_properties> 98</Number_variable_wall_properties>
   <Variable_wall_properties_file_path> /home/bazzi/repo/svFSG/mesh/solid-mesh-complete/mesh-complete.mesh.vtu </Variable_wall_properties_file_path>
 </Add_mesh>
 
-
 <Add_equation type="ustruct" > 
    <Coupled> true </Coupled>
-   <Min_iterations> 1 </Min_iterations>  
-   <Max_iterations> 7 </Max_iterations> 
-   <Tolerance> 1e-12 </Tolerance> 
+   <Min_iterations> 2 </Min_iterations>  
+   <Max_iterations> 20 </Max_iterations> 
+   <Tolerance> 1e-4 </Tolerance> 
 
-   <Domain id="0" >
-      <Equation> fluid </Equation> 
-      <Density> 1.0 </Density> 
-      <Viscosity model="Constant" >
-         <Value> 0.04 </Value>
-      </Viscosity>
-      <Backflow_stabilization_coefficient> 0.2 </Backflow_stabilization_coefficient> 
-   </Domain>
-   
-   <Domain id="1" >
-      <Equation> struct </Equation> 
-      <Constitutive_model type="aniso"> </Constitutive_model> 
-      <Dilational_penalty_model> M94 </Dilational_penalty_model> 
-      <Density> 1.0 </Density> 
-   </Domain>
+   <Density> 1.0 </Density>                           <!-- g/cm^3 -->
+   <Elasticity_modulus> 1.0e5 </Elasticity_modulus>   <!-- dyne/cm^2 -->
+   <Poisson_ratio> 0.483333 </Poisson_ratio>
+   <Constitutive_model type="aniso"> </Constitutive_model> 
+   <Dilational_penalty_model> ST91 </Dilational_penalty_model>
+   <Viscosity model="Constant" >
+         <Value> 0.0 </Value>
+   </Viscosity>
+
+
+    <Output type="Spatial" >
+     <Displacement> true </Displacement>
+     <Velocity> true </Velocity>
+     <Jacobian> true </Jacobian>
+     <Stress> true </Stress>
+     <Strain> true </Strain>
+     <Cauchy_stress> true </Cauchy_stress>
+     <Def_grad> true </Def_grad>
+     <VonMises_stress> true </VonMises_stress>
+   </Output>
 
    <LS type="GMRES" >
       <Linear_algebra type="fsils" >
@@ -75,23 +79,7 @@
       <Max_iterations> 100 </Max_iterations> 
       <Krylov_space_dimension> 50 </Krylov_space_dimension>
    </LS>
-
-   <Output type="Spatial" >
-     <Displacement> true </Displacement>
-     <Velocity> true </Velocity>
-     <Pressure> true </Pressure>
-     <VonMises_stress> true </VonMises_stress>
-   </Output>
-
-   <Output type="Alias" >
-       <Displacement> FS_Displacement </Displacement>
-   </Output>
-
-   <Add_BC name="lumen_inlet" > 
-      <Type> Neu </Type> 
-      <Value> 5.0e4 </Value> 
-   </Add_BC> 
-
+   
    <Add_BC name="wall_inlet" > 
       <Type> Dir </Type> 
       <Value> 0.0 </Value> 
@@ -109,36 +97,4 @@
    </Add_BC> 
 
 </Add_equation>
-
-
-<Add_equation type="mesh" >
-   <Coupled> true </Coupled>
-   <Min_iterations> 1 </Min_iterations>
-   <Max_iterations> 7 </Max_iterations>
-   <Tolerance> 1e-12 </Tolerance>
-   <Poisson_ratio> 0.3 </Poisson_ratio> 
-
-   <LS type="CG" >
-      <Linear_algebra type="fsils" >
-         <Preconditioner> fsils </Preconditioner>
-      </Linear_algebra>
-      <Tolerance> 1e-12 </Tolerance>
-   </LS>
-
-   <Output type="Spatial" >
-     <Displacement> true </Displacement>
-   </Output>
-
-   <Add_BC name="lumen_inlet" > 
-      <Type> Dir </Type> 
-      <Value> 0.0 </Value> 
-   </Add_BC> 
-
-   <Add_BC name="lumen_outlet" > 
-      <Type> Dir </Type> 
-      <Value> 0.0 </Value> 
-   </Add_BC> 
-
-</Add_equation>
-
 </svFSIFile>
