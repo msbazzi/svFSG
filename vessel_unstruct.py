@@ -1,25 +1,34 @@
 from utils import *
 import time
 from cvessel import cvessel
-import sympy
+#import sympy
 import pyvista as pv
+import heat_transfer
 
 # This class provides functionality to running an FSG simulation
 class Vessel():
 
     def __init__(self, **kwargs):
 
-        self.mesh= kwargs.get("mesh","pipe/wall-mesh-complete/mesh-complete.mesh.vtu")
-        self.surfaces= kwargs.get("surfaces",["pipe/wall-mesh-complete/mesh-surfaces/inner.vtp",
-                                               "pipe/wall-mesh-complete/mesh-surfaces/outer.vtp",
-                                                "pipe/wall-mesh-complete/mesh-surfaces/outlet.vtp",
-                                                "pipe/wall-mesh-complete/mesh-surfaces/inlet.vtp" ])
+        self.mesh= kwargs.get("mesh","mesh/solid-mesh-complete/mesh-complete.mesh.vtu")
+        self.vtp_full= kwargs.get("vtp_full","mesh/solid-mesh-complete/mesh-complete.mesh.vtp")
+        self.surfaces_folder= kwargs.get("surfaces_folder","mesh/solid-mesh-complete/mesh-surfaces")
+        self.mesh= kwargs.get("mesh","mesh/solid-mesh-complete/mesh-complete.mesh.vtu")
+        # self.surfaces= kwargs.get("surfaces",["pipe/solid-mesh-complete/mesh-surfaces/inner.vtp",
+        #                                        "pipe/solid-mesh-complete/mesh-surfaces/outer.vtp",
+        #                                         "pipe/solid-mesh-complete/mesh-surfaces/outlet.vtp",
+        #                                         "pipe/solid-mesh-complete/mesh-surfaces/inlet.vtp" ])
+        self.surfaces= kwargs.get("surfaces",["mesh/solid-mesh-complete/mesh-surfaces/wall_inner.vtp",
+                                               "mesh/solid-mesh-complete/mesh-surfaces/wall_outer.vtp",
+                                                "mesh/solid-mesh-complete/mesh-surfaces/wall_outlet.vtp",
+                                                "mesh/solid-mesh-complete/mesh-surfaces/wall_inlet.vtp" ])
         self.radial_heat_flux =  kwargs.get("radial_heat_flux","/home/bazzi/repo/svFSG/simulationResults/heat_radial.vtu")
         self.axial_heat_flux =  kwargs.get("axial_heat_flux","/home/bazzi/repo/svFSG/simulationResults/heat_axial.vtu")
         self.configuration_file =  kwargs.get("configuration_file","/home/bazzi/repo/svFSG/FolderVesselConfigurationFiles/Native_in_handshake_")
         self.vesselReference = None
         self.vesselSolid = None #kwargs.get("vesselSolid","pipe/wall-mesh-complete/mesh-complete.mesh.vtu")
-        self.vesselFluid = pv.read("pipe/lumen-mesh-complete/mesh-complete.mesh.vtu")
+        self.vesselFluid = pv.read("mesh/lumen-mesh-complete/mesh-complete.mesh.vtu")
+       #self.vesselFluid = pv.read("mesh/lumen-mesh-complete/mesh-complete.mesh.vtu")
         self.solidResult = None
         self.fluidResult = None
         self.sigma_h = None
@@ -226,18 +235,18 @@ class Vessel():
         os.system('rm -rf '+self.resultDir +'/*')
         if self.timeIter == 0 and self.timeStep == 0:
             if self.numProcessorsSolid is not None:
-                os.system("mpirun -n " + str(self.numProcessorsSolid) + " " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_mm.mfs")
+                os.system("mpirun -n " + str(self.numProcessorsSolid) + " " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_mm_struct.mfs")
             else:
                 print("check for the executable",self.simulationExecutable)
                 print("check for input dir", self.simulationInputDirectory)
-                os.system("mpirun " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_mm.mfs")
+                os.system("mpirun " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_mm_struct.mfs")
         else:
             if self.numProcessorsSolid is not None:
                 os.system("mpirun -n " + str(self.numProcessorsSolid) + " " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_aniso.mfs")
             else:
                 os.system("mpirun " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_aniso.mfs")
         print("Solid simulation finished.")
-        os.system('cp ' + self.resultDir + '/result_'+str(self.resultNum)+'.vtu simulationResults/solid_' + str(self.timeStep) + '.vtu')
+        os.system('cp ' + self.resultDir + '/result_'+str(self.resultNum)+'.vtu simulationResults/solid__struct_' + str(self.timeStep) + '.vtu')
 
         return
 
@@ -251,7 +260,7 @@ class Vessel():
             if 'NaN' in f.read():
                 raise RuntimeError("Simulation has NaN!")
         print("Fluid simulation finished.")
-        os.system('cp ' + self.resultDir + '/result_'+str(self.resultNum)+'.vtu simulationResults/fluid_' + str(self.timeStep) + '.vtu')
+        os.system('cp ' + self.resultDir + '/result_'+str(self.resultNum)+'.vtu simulationResults/fluid__struct_' + str(self.timeStep) + '.vtu')
         return
 
     def runHeatT(self):
@@ -460,18 +469,32 @@ class Vessel():
     def saveSolid(self):
         vol = self.vesselSolid
 
-        os.makedirs(self.prefix + 'pipe/wall-mesh-complete/mesh-surfaces', exist_ok=True)
-        save_data(self.prefix + 'pipe/wall-mesh-complete/mesh-complete.mesh.vtu',vol)
+        # os.makedirs(self.prefix + 'pipe/wall-mesh-complete/mesh-surfaces', exist_ok=True)
+        # save_data(self.prefix + 'pipe/wall-mesh-complete/mesh-complete.mesh.vtu',vol)
+        # surf = vol.extract_surface()
+        # save_data(self.prefix + 'pipe/wall-mesh-complete/mesh-complete.mesh.vtp',surf)
+        # outer = thresholdModel(surf, 'OuterRegionID',0.5,1.5)
+        # save_data(self.prefix + 'pipe/wall-mesh-complete/mesh-surfaces/outer.vtp',outer)
+        # distal = thresholdModel(surf, 'DistalRegionID',0.5,1.5)
+        # save_data(self.prefix + 'pipe/wall-mesh-complete/mesh-surfaces/inlet.vtp',distal)
+        # proximal = thresholdModel(surf, 'ProximalRegionID',0.5,1.5)
+        # save_data(self.prefix + 'pipe/wall-mesh-complete/mesh-surfaces/outlet.vtp',proximal)
+        # inner = thresholdModel(surf, 'InnerRegionID',0.5,1.5)
+        # save_data(self.prefix + 'pipe/wall-mesh-complete/mesh-surfaces/inner.vtp',inner)
+
+
+        os.makedirs(self.prefix + self.surfaces_folder, exist_ok=True)
+        save_data(self.prefix + self.mesh,vol)
         surf = vol.extract_surface()
-        save_data(self.prefix + 'pipe/wall-mesh-complete/mesh-complete.mesh.vtp',surf)
+        save_data(self.prefix + self.vtp_full,surf)
         outer = thresholdModel(surf, 'OuterRegionID',0.5,1.5)
-        save_data(self.prefix + 'pipe/wall-mesh-complete/mesh-surfaces/outer.vtp',outer)
+        save_data(self.prefix + self.surfaces[1],outer)
         distal = thresholdModel(surf, 'DistalRegionID',0.5,1.5)
-        save_data(self.prefix + 'pipe/wall-mesh-complete/mesh-surfaces/inlet.vtp',distal)
+        save_data(self.prefix + self.surfaces[3],distal)
         proximal = thresholdModel(surf, 'ProximalRegionID',0.5,1.5)
-        save_data(self.prefix + 'pipe/wall-mesh-complete/mesh-surfaces/outlet.vtp',proximal)
+        save_data(self.prefix + self.surfaces[2],proximal)
         inner = thresholdModel(surf, 'InnerRegionID',0.5,1.5)
-        save_data(self.prefix + 'pipe/wall-mesh-complete/mesh-surfaces/inner.vtp',inner)
+        save_data(self.prefix + self.surfaces[0],inner)
 
         return
 
@@ -484,8 +507,8 @@ class Vessel():
         numCellsVol = fluidVol.GetNumberOfCells()
 
         # Need to order ids to match globalNodeID order
-        fluidVol.GetPointData().AddArray(pv.convert_array(np.linspace(1,numPtsVol,numPtsVol).astype(int),name="GlobalNodeID"))
-        fluidVol.GetCellData().AddArray(pv.convert_array(np.linspace(1,numCellsVol,numCellsVol).astype(int),name="GlobalElementID"))
+        fluidVol.GetPointData().AddArray(pv.convert_array(np.linspace(1,numPtsVol,numPtsVol).astype(np.int32),name="GlobalNodeID"))
+        fluidVol.GetCellData().AddArray(pv.convert_array(np.linspace(1,numCellsVol,numCellsVol).astype(np.int32),name="GlobalElementID"))
 
         save_data(self.prefix + 'mesh/lumen-mesh-complete/mesh-complete.mesh.vtu',fluidVol)
         innerVolSurf = pv.wrap(fluidVol).extract_surface()
@@ -869,6 +892,7 @@ class Vessel():
         # Get the cell data (connectivity) and point data (coordinates)
         points = heat_flux_data.points
         cells = heat_flux_data.cells_dict[10]  # Assuming tetrahedral elements; adjust as needed
+        #cells = heat_flux_data.cells_dict[12]  # Assuming hexa elements; adjust as needed
 
         cell_centers = []
         for cell in cells:
@@ -892,6 +916,7 @@ class Vessel():
         # Interpolate the heat flux at the cell centers
         # Here we use the same method for simplicity, by averaging the heat flux at the points of each cell
         cells = heat_flux_data.cells_dict[10]  # Assuming tetrahedral elements; adjust as needed
+        #cells = heat_flux_data.cells_dict[12]  # Assuming hexA elements; adjust as needed
         cell_heat_flux = []
         for cell in cells:
             # Compute the average heat flux for the cell
@@ -944,7 +969,10 @@ class Vessel():
         e_z = np.zeros((numCells,3))
         tevgValue = np.zeros(numCells)
         innerIds = np.zeros(numCells)
-        
+        #for j in range(numPoints):
+   
+
+             
         for i in range(numCells):
             
             xPt = cell_center_radial[i,0]
@@ -982,18 +1010,25 @@ class Vessel():
             # assuming is TEVG in the whole domain
             #tevgValue[i] = 1 #getTEVGValue([xPt,yPt,zPt], self.radius)
                # if tevgValue[k + j*self.numRad + i*self.numRad*self.numCirc] > 0:
-            e_ma[i,4] = 200000000
-            e_ma[i,1] = 1
-            e_ma[i,2] = 1
-            e_ma[i,3] = 1
-            e_ma[i,14] = 0
-            e_ma[i,28] = 0
-            e_ma[i,42] = 0
-            e_ma[i,56] = 0
-            e_ma[i,70] = 0
-            e_ma[i,84] = 0          
-
+            # e_ma[i,4] = 200000000
+            # e_ma[i,1] = 1
+            # e_ma[i,2] = 1
+            # e_ma[i,3] = 1
+            # e_ma[i,14] = 0
+            # e_ma[i,28] = 0
+            # e_ma[i,42] = 0
+            # e_ma[i,56] = 0
+            # e_ma[i,70] = 0
+            # e_ma[i,84] = 0          
         
+        
+        # cell_center_radial = pv.PolyData(cell_center_radial) 
+
+        # cell_center_radial['ema'] =  e_ma[:,1]
+        # plotter = pv.Plotter()
+        # plotter.add_mesh(cell_center_radial, scalars='ema', point_size=10)
+        # plotter.show()
+        #heat_transfer.plot_heat_flux(cell_center_radial, -e_r, skip=5)
         ids = [ 'InnerRegionID', 'OuterRegionID', 'DistalRegionID', 'ProximalRegionID']
         numPoints = vol.GetNumberOfPoints()
         distance = np.zeros(numPoints)
@@ -1015,13 +1050,13 @@ class Vessel():
               
                 if distance [j] < 1e-2:
                     surface_points_ids[j] = 1 
-            vol.GetPointData().AddArray(pv.convert_array((surface_points_ids).astype(int),name=ids[i]))
+            vol.GetPointData().AddArray(pv.convert_array((surface_points_ids).astype(np.int32),name=ids[i]))
  
        
         numCells = vol.GetNumberOfCells()
-        vol.GetCellData().AddArray(pv.convert_array(np.zeros((numCells,45*self.nG)).astype(float),name="temp_array"))
-        vol.GetCellData().AddArray(pv.convert_array(np.linspace(1,numCells,numCells).astype(int),name="GlobalElementID"))
-        vol.GetCellData().AddArray(pv.convert_array(np.linspace(1,numCells,numCells).astype(int),name="CellStructureID"))
+        vol.GetCellData().AddArray(pv.convert_array(np.zeros((numCells,45*self.nG)).astype(float),name="temp_rray"))
+        vol.GetCellData().AddArray(pv.convert_array(np.linspace(1,numCells,numCells).astype(np.int32),name="aGlobalElementID"))
+        vol.GetCellData().AddArray(pv.convert_array(np.linspace(1,numCells,numCells).astype(np.int32),name="CellStructureID"))
         vol.GetCellData().AddArray(pv.convert_array(e_ma.astype(float),name="varWallProps"))
        
         #Exchange these to gauss point quantities
@@ -1053,7 +1088,7 @@ class Vessel():
         vol.GetCellData().AddArray(pv.convert_array(e_ma.astype(float),name="material_global"))
         
         numPts = vol.GetNumberOfPoints()
-        vol.GetPointData().AddArray(pv.convert_array(np.linspace(1,numPts,numPts).astype(int),name="GlobalNodeID"))
+        vol.GetPointData().AddArray(pv.convert_array(np.linspace(1,numPts,numPts).astype(np.int32),name="GlobalNodeID"))
         vol.GetPointData().AddArray(pv.convert_array(np.tile(np.zeros(3),(numPts,1)).astype(float),name="displacements"))
         vol.GetPointData().AddArray(pv.convert_array(np.tile(np.zeros(3),(numPts,1)).astype(float),name="residual_curr"))
         vol.GetPointData().AddArray(pv.convert_array(np.tile(np.zeros(3),(numPts,1)).astype(float),name="residual_prev"))

@@ -4,6 +4,7 @@ import os
 import time
 import numpy as np
 
+
 def saveVessel(vess):
     with open('vessel.pickle', 'wb') as file:
         pickle.dump(vess,file)
@@ -17,10 +18,11 @@ def loadVessel():
 os.system("mpiexec python3 utils_init_vessel.py")
 startTime = time.time()
 
-if os.path.exists('vessel.pickle'):
-    simulation_vessel = loadVessel()
-    simulation_vessel.startTime = simulation_vessel.currTime
-else:
+# if os.path.exists('vessel.pickle'):
+#     simulation_vessel = loadVessel()
+#     simulation_vessel.startTime = simulation_vessel.currTime
+# else:
+if True:
     simulation_vessel = vessel.Vessel()
     simulation_vessel.outletPressure = 1333.22*105
     simulation_vessel.inletFlow = -97.0
@@ -30,7 +32,7 @@ else:
     simulation_vessel.penalty = 1e9
     simulation_vessel.tolerance = 1e-3
     simulation_vessel.simulationExecutable ="/home/bazzi/repo/svFSI/build/svFSI-build/bin/svFSI"
-    simulation_vessel.numProcessorsSolid = 2
+    simulation_vessel.numProcessorsSolid = 4
     simulation_vessel.smoothAttributesValue = 0.1
     os.system('mkdir -p ' + simulation_vessel.outputDir)
     os.system('mkdir -p ' + 'meshIterations')

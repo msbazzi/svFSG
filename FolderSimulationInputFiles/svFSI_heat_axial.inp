@@ -23,18 +23,18 @@ Debug: 0
 #----------------------------------------------------------------
 # Mesh data
 Add mesh: msh {
-   Mesh file path:    /home/bazzi/repo/svFSG/pipe/wall-mesh-complete/mesh-complete.mesh.vtu
+   Mesh file path:    /home/bazzi/repo/svFSG/pipe/solid-mesh-complete/mesh-complete.mesh.vtu
    Add face: wall_inlet {
-      Face file path: /home/bazzi/repo/svFSG/pipe/wall-mesh-complete/mesh-surfaces/inlet.vtp
+      Face file path: /home/bazzi/repo/svFSG/pipe/solid-mesh-complete/mesh-surfaces/inlet.vtp
    }
    Add face: wall_outlet {
-      Face file path: /home/bazzi/repo/svFSG/pipe/wall-mesh-complete/mesh-surfaces/outlet.vtp
+      Face file path: /home/bazzi/repo/svFSG/pipe/solid-mesh-complete/mesh-surfaces/outlet.vtp
    }
    Add face: wall_outer {
-      Face file path: /home/bazzi/repo/svFSG/pipe/wall-mesh-complete/mesh-surfaces/outer.vtp
+      Face file path: /home/bazzi/repo/svFSG/pipe/solid-mesh-complete/mesh-surfaces/outer.vtp
    }
    Add face: wall_inner {
-      Face file path: /home/bazzi/repo/svFSG/pipe/wall-mesh-complete/mesh-surfaces/inner.vtp
+      Face file path: /home/bazzi/repo/svFSG/pipe/solid-mesh-complete/mesh-surfaces/inner.vtp
    }
 }
 

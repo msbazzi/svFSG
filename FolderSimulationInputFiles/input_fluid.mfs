@@ -25,15 +25,15 @@ Debug: 0
 #----------------------------------------------------------------
 # Mesh data
 Add mesh: lumen {
-   Mesh file path: pipe/lumen-mesh-complete/mesh-complete.mesh.vtu
+   Mesh file path: mesh/lumen-mesh-complete/mesh-complete.mesh.vtu
    Add face: lumen_wall {
-      Face file path: pipe/lumen-mesh-complete/mesh-surfaces/lumen_wall.vtp
+      Face file path: mesh/lumen-mesh-complete/mesh-surfaces/lumen_wall.vtp
    }
    Add face: lumen_outlet {
-      Face file path: pipe/lumen-mesh-complete/mesh-surfaces/outlet.vtp
+      Face file path: mesh/lumen-mesh-complete/mesh-surfaces/lumen_outlet.vtp
    }
    Add face: lumen_inlet {
-      Face file path: pipe/lumen-mesh-complete/mesh-surfaces/inlet.vtp
+      Face file path: mesh/lumen-mesh-complete/mesh-surfaces/lumen_inlet.vtp
    }
 
 
