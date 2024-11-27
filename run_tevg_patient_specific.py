@@ -23,7 +23,7 @@ startTime = time.time()
     simulation_vessel = loadVessel()
     simulation_vessel.startTime = simulation_vessel.currTime
 else:'''
-simulation_vessel = vessel.Vessel(vesselType="segmentation", segmentationName="line", numLen=42, numCirc=32, numRad=6, rotateSegmentation=True)
+simulation_vessel = vessel.Vessel(vesselType="segmentation", segmentationName="IVC", numLen=42, numCirc=32, numRad=6, rotateSegmentation=True)
 simulation_vessel.radius = 1.1
 simulation_vessel.gnr_step_size = 2.0
 simulation_vessel.zcenter = 0.895
@@ -41,7 +41,7 @@ simulation_vessel.numProcessorsFluid = 96
 simulation_vessel.flipContours = True
 simulation_vessel.flipInlet = True
 simulation_vessel.smoothAttributesValue = 0.1
-simulation_vessel.setInputFileValues()
+#simulation_vessel.setInputFileValues()
 os.system('mkdir -p ' + simulation_vessel.outputDir)
 os.system('mkdir -p ' + 'meshIterations')
 os.system('mkdir -p ' + 'meshResults')

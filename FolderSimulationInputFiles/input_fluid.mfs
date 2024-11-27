@@ -3,13 +3,13 @@
 Continue previous simulation: 0
 Number of spatial dimensions: 3
 Number of time steps: 200
-Time step size: 0.1e-2
+Time step size: 1e-5
 Spectral radius of infinite time step: 0.2
 Searched file name to trigger stop: STOP_SIM
 
 Save results to VTK format: 1
 Name prefix of saved VTK files: result
-Increment in saving VTK files: 100
+Increment in saving VTK files: 5
 Start saving after time step: 1
 Save results in folder: results
 
@@ -25,15 +25,15 @@ Debug: 0
 #----------------------------------------------------------------
 # Mesh data
 Add mesh: lumen {
-   Mesh file path: pipe/lumen-mesh-complete/mesh-complete.mesh.vtu
+   Mesh file path: mesh/lumen-mesh-complete/mesh-complete.mesh.vtu
    Add face: lumen_wall {
-      Face file path: pipe/lumen-mesh-complete/mesh-surfaces/lumen_wall.vtp
+      Face file path: mesh/lumen-mesh-complete/mesh-surfaces/lumen_wall.vtp
    }
    Add face: lumen_outlet {
-      Face file path: pipe/lumen-mesh-complete/mesh-surfaces/outlet.vtp
+      Face file path: mesh/lumen-mesh-complete/mesh-surfaces/lumen_outlet.vtp
    }
    Add face: lumen_inlet {
-      Face file path: pipe/lumen-mesh-complete/mesh-surfaces/inlet.vtp
+      Face file path: mesh/lumen-mesh-complete/mesh-surfaces/lumen_inlet.vtp
    }
 
 
@@ -53,11 +53,12 @@ Add equation: fluid {
 
    LS type: GMRES
    {
-      #Preconditioner: Trilinos-ICT
+    Preconditioner: FSILS
       Tolerance: 1e-3
       Max iterations: 200
       Krylov space dimension: 300
    }
+
 
    Output: Spatial {
       Velocity: t
@@ -69,17 +70,15 @@ Add equation: fluid {
    Add BC: lumen_inlet {
       Type: Dir
       Time dependence: Steady
-      Value: -97.0
-      Impose flux: 1
+      Value: -20
       Profile: Parabolic
    }   
 
    Add BC: lumen_outlet {
       Type: Neu
       Time dependence: Resistance
-      Value: 1443.176288659794
-   }   
-
+      Value: 3075
+}
    #Add BC: lumen_outlet {
    #   Type: Dir
    #   Time dependence: Steady

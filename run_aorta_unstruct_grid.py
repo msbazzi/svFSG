@@ -1,4 +1,4 @@
-import vessel_unstruct as vessel
+import vessel_struct as vessel
 import pickle
 import os
 import time
@@ -30,7 +30,7 @@ if True:
     simulation_vessel.damping = 1e7
     simulation_vessel.penalty = 1e9
     simulation_vessel.tolerance = 1e-3
-    simulation_vessel.simulationExecutable ="/home/bazzi/repo/svFSI/build/svFSI-build/bin/svFSI"
+    simulation_vessel.simulationExecutable ="/home/bazzi/repo/svFSIplus/build/svFSI-build/bin/svFSI"
     simulation_vessel.numProcessorsSolid = 4
     simulation_vessel.smoothAttributesValue = 0.1
     os.system('mkdir -p ' + simulation_vessel.outputDir)

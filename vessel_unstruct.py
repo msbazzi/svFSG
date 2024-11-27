@@ -4,6 +4,7 @@ from cvessel import cvessel
 import sympy
 import pyvista as pv
 import heat_transfer
+import matplotlib.pyplot as plt
 
 # This class provides functionality to running an FSG simulation
 class Vessel():
@@ -13,7 +14,6 @@ class Vessel():
         self.mesh= kwargs.get("mesh","pipe/solid-mesh-complete/mesh-complete.mesh.vtu")
         self.vtp_full= kwargs.get("vtp_full","pipe/solid-mesh-complete/mesh-complete.mesh.vtp")
         self.surfaces_folder= kwargs.get("surfaces_folder","pipe/solid-mesh-complete/mesh-surfaces")
-        self.mesh= kwargs.get("mesh","pipe/solid-mesh-complete/mesh-complete.mesh.vtu")
         self.surfaces= kwargs.get("surfaces",["pipe/solid-mesh-complete/mesh-surfaces/inner.vtp",
                                                "pipe/solid-mesh-complete/mesh-surfaces/outer.vtp",
                                                 "pipe/solid-mesh-complete/mesh-surfaces/outlet.vtp",
@@ -71,7 +71,7 @@ class Vessel():
         self.numProcessorsFluid = None
         self.numProcessorsFluidSolid = None
         self.zcenter = 0.0
-        self.nq = 8
+        self.nq = 4
         self.iq_eps = 1e-12
         self.mat_W = []
         self.mat_V = []
@@ -162,6 +162,7 @@ class Vessel():
         if   self.timeStep == 0 and self.timeIter == 0:
             self.runFluid()
             self.updateSolid()
+            self.saveSolid()
             self.updateFluidResults()
             self.appendIterfaceResult()
         
@@ -236,12 +237,8 @@ class Vessel():
     def runSolid(self):
         os.system('rm -rf '+self.resultDir +'/*')
         if self.timeIter == 0 and self.timeStep == 0:
-            if self.numProcessorsSolid is not None:
-                os.system("mpirun -n " + str(self.numProcessorsSolid) + " " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_mm_struct.mfs")
-            else:
-                print("check for the executable",self.simulationExecutable)
-                print("check for input dir", self.simulationInputDirectory)
-                os.system("mpirun " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_mm_struct.mfs")
+         
+                os.system("mpirun -n 10 ~/repo/svFSI/build/svFSI-build/bin/svFSI FolderSimulationInputFiles/solid_mm_unstruct.mfs")
         else:
             if self.numProcessorsSolid is not None:
                 os.system("mpirun -n " + str(self.numProcessorsSolid) + " " + self.simulationExecutable + " " + self.simulationInputDirectory + "/solid_aniso.mfs")
@@ -450,17 +447,6 @@ class Vessel():
 
     def updateSolid(self):
 
-        # if   self.timeStep == 0 and self.timeIter == 0:    
-        #     self.vesselSolid = self.vesselReference.warp_by_vector("displacements")
-        #     arrayNames = self.vesselReference.array_names
-        #     for name in arrayNames:
-        #         if name not in ["GlobalNodeID", "varWallProps", "GlobalElementID", "InnerRegionID", "OuterRegionID", "DistalRegionID", "ProximalRegionID", "StructureID", "Pressure", "Coordinate"]:
-        #             if name in self.vesselSolid.point_data:
-        #                 self.vesselSolid.point_data.remove(name)
-        #             if name in self.vesselSolid.cell_data:
-        #                 self.vesselSolid.cell_data.remove(name)
-            
-        # else:
         self.vesselSolid = self.vesselReference.warp_by_vector("displacements")
         arrayNames = self.vesselReference.array_names
         for name in arrayNames:
@@ -481,7 +467,7 @@ class Vessel():
             self.vesselFluid = self.generateFluidMesh(inner)
 
     def saveSolid(self):
-        vol = self.vesselReference
+        vol = self.vesselSolid
 
         # os.makedirs(self.prefix + 'pipe/wall-mesh-complete/mesh-surfaces', exist_ok=True)
         # save_data(self.prefix + 'pipe/wall-mesh-complete/mesh-complete.mesh.vtu',vol)
@@ -1009,7 +995,20 @@ class Vessel():
             e_r[i,:] = vr
             e_t[i,:] = vt
             e_z[i,:] = vz
+            #plt.ion()
 
+            # fig = plt.figure()
+            # ax = fig.add_subplot(111, projection='3d')
+            #         # Plot quiver plot with dynamic capability
+            # ax.quiver(cell_center_axial[:, 0], cell_center_axial[:, 1], cell_center_axial[:, 2], cell_heat_flux_radial[:, 0], cell_heat_flux_radial[:, 1], cell_heat_flux_radial[:, 2], length=0.5, normalize=True)
+            # plt.show(block=True)  # Keeps the plot open until manually closed
+
+
+            # fig = plt.figure()
+            # ax = fig.add_subplot(111, projection='3d')
+            #         # Plot quiver plot with dynamic capability
+            # ax.quiver(cell_center_axial[:, 0], cell_center_axial[:, 1], cell_center_axial[:, 2], cell_heat_flux_radial[:, 0], cell_heat_flux_radial[:, 1], cell_heat_flux_radial[:, 2], length=0.5, normalize=True)
+            # plt.show(block=True)  # Keeps the plot open until manually closed
             e_ma[i,:] = materialArray
             
             

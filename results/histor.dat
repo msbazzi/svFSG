@@ -7,7 +7,7 @@
  ----------------------------------------------
 
  This program comes with ABSOLUTELY NO WARRANTY
- Compiled on 11-13-2024
+ Compiled on 11-26-2024
 
  Running sequentially
  Number of meshes: 1
@@ -17,70 +17,27 @@
  Make sure corner nodes in elements are arranged 1-4 on
       one face and 5-8 on the opposite face
       https://vtk.org/wp-content/uploads/2015/04/file-formats.pdf
- Number of available faces: 4
+ Number of available faces: 5
  <VTK XML Parser> Loading file </home/bazzi/repo/svFSG/mesh/solid-mesh-complete/mesh-surfaces/wall_inlet.vtp>
  <VTK XML Parser> Loading file </home/bazzi/repo/svFSG/mesh/solid-mesh-complete/mesh-surfaces/wall_outlet.vtp>
  <VTK XML Parser> Loading file </home/bazzi/repo/svFSG/mesh/solid-mesh-complete/mesh-surfaces/wall_inner.vtp>
  <VTK XML Parser> Loading file </home/bazzi/repo/svFSG/mesh/solid-mesh-complete/mesh-surfaces/wall_outer.vtp>
- Number of nodes: 300
- Number of elements: 192
+ <VTK XML Parser> Loading file </home/bazzi/repo/svFSG/mesh/solid-mesh-complete/mesh-surfaces/ring_outlet.vtp>
+ Number of nodes: 1200
+ Number of elements: 768
+ Setting cell variable wall flag to true
+ <VTK XML Parser> Loading file </home/bazzi/repo/svFSG/mesh/solid-mesh-complete/mesh-complete.mesh.vtu>
  Mesh data imported successfully
- Domain size X: -9.33E-1 9.335E-1
- Domain size Y: -9.33E-1 9.335E-1
+ Domain size X: -9.31E-1 9.316E-1
+ Domain size Y: -9.31E-1 9.316E-1
  Domain size Z: -4.28E-1 4.286E-1
  Number of equations: 1
  WARNING: Couldn't find any penalty model
  Using linear solver: GMRES
  Using preconditioner: FSILS
  Number of imposed BC for equation <struct>: 3
- <VTK XML Parser> Loading file </home/bazzi/repo/svFSG/mesh/ Number of nodes: 300
- Number of elements: 192
- Me Configuration is completed successfully
- Constructing stiffness matrix sparse structure
- Total number of non-zeros in the LHS matrix: 6084
- Initializing state variables to zero
- Eq. <ST>
-    Volume of domain <-1> is 3.418E-1
-    Area of face <wall_inlet> is 3.987E-1
-    Area of face <wall_outlet> is 3.987E-1
-    Area of face <wall_inner> is 4.576678
-    Area of face <wall_outer> is 4.971475
-
----------------- Configuration is completed successfully
- Constructing stiffness matrix sparse structure
- Total number of non-zeros in the LHS matrix: 6084
- Initializing state variables to zero
- Eq. <ST>
-    Volume of domain <-1> is 3.418E-1
-    Area of face <wall_inlet> is 3.987E-1
-    Area of face <wall_outlet> is 3.987E-1
-    Area of face <wall_inner> is 4.576678
-    Area of face <wall_outer> is 4.971475
-
----------------------------------------------------------------------
- Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
----------------------------------------------------------------------
- New time step size: 1.000E-4
+ <VTK XML Parser> Loading file </home/bazzi/repo/svFSG/Original_Validation/svFSG/simulationsResults/fluid_0.vtu>
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ERROR occurred, see below for more explanation
-ERROR: Need defined variable wall properties to use mixture model
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-is completed successfully
- Constructing stiffness matrix sparse structure
- Total number of non-zeros in the LHS matrix: 6084
- Initializing state variables to zero
- Eq. <ST>
-    Volume of domain <-1> is 3.418E-1
-    Area of face <wall_inlet> is 3.987E-1
-    Area of face <wall_outlet> is 3.987E-1
-    Area of face <wall_inner> is 4.576678
-    Area of face <wall_outer> is 4.971475
-
----------------------------------------------------------------------
- Eq     N-i     T       dB  Ri/R1   Ri/R0    R/Ri     lsIt   dB  %t
----------------------------------------------------------------------
- New time step size: 1.000E-4
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-ERROR occurred, see below for more explanation
-ERROR: Need defined variable wall properties to use mixture model
+ERROR: VTP file read error (init)
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

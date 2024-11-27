@@ -1,0 +1,19 @@
+
+ ----------------------------------------------
+
+    SimVascular Fluid-Structure Interaction
+                   (svFSI)
+
+ ----------------------------------------------
+
+ This program comes with ABSOLUTELY NO WARRANTY
+ Compiled on 11-13-2024
+
+ Running in parallel with 6 tasks
+ Number of meshes: 1
+ Reading mesh <lumen>
+ <VTK XML Parser> Loading file <mesh/lumen-mesh-complete/mesh-complete.mesh.vtu>
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ERROR occurred, see below for more explanation
+ERROR: VTU file read error (init)
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

@@ -57,14 +57,14 @@ Add equation: struct {
    Penalty parameter: 5000000.0
    Density: 0.0
    Mass damping: 10000.0
-
+   Penalty parameter: 100000000.0
    LS type: GMRES {
-      Preconditioner: FSILS
+   Mass damping: 10000.0
+      Max iterations: 10
+   LS type: GMRES {
+   }
       Max iterations: 10
       Krylov space dimension: 50
-   }
-   
-   Output: Spatial {
       Displacement: t
       Velocity: t
       Jacobian: t

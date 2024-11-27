@@ -20,9 +20,9 @@ startTime = time.time()
     simulation_vessel = loadVessel()
     simulation_vessel.startTime = simulation_vessel.currTime
 else: '''
-simulation_vessel = vessel.Vessel(radius=0.8573, thickness=0.0743, length=0.8573, numLen=4, numCirc=24, numRad=4)
+simulation_vessel = vessel.Vessel(radius=0.8573, thickness=0.0743, length=0.8573, numLen=4, numCirc=48, numRad=4)
 simulation_vessel.gnr_step_size = 4.0
-'''    #simulation_vessel.inletFlow = 1.2*simulation_vessel.inletFlow
+'''    #simulation_vessel.inletFlow = 1.2*simulation_vessel.inletFlow969
     #simulation_vessel.outletPressure = (1/1.2)*simulation_vessel.outletPressure
     #simulation_vessel.adaptiveMesh = True
     #simulation_vessel.tevg = 1
@@ -30,9 +30,9 @@ simulation_vessel.gnr_step_size = 4.0
     simulation_vessel.penalty = 1e8
     simulation_vessel.tolerance = 1e-4
     simulation_vessel.numProcessorsSolid = 4
-    simulation_vessel.numProcessorsFluid = 4
-    simulation_vessel.simulationExecutable = "/home/bazzi/repo/svFSIplus/build/svFSI-build/bin/svFSI" '''
-simulation_vessel.setInputFileValues()
+    simulation_vessel.numProcessorsFluid = 4 '''
+simulation_vessel.simulationExecutable = "/home/bazzi/repo/svFSI/build/svFSI-build/bin/svFSI"
+#simulation_vessel.setInputFileValues()
 os.system('mkdir -p ' + simulation_vessel.outputDir)
 os.system('mkdir -p ' + 'meshIterations')
 os.system('mkdir -p ' + 'meshResults')

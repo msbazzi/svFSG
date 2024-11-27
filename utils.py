@@ -27,8 +27,8 @@ def read_data(file_name, file_format="vtp", datatype=None):
     """
 
     # Check if file exists
-    if not os.path.exists(file_name):
-        raise RuntimeError("Could not find file: %s" % file_name)
+    # if not os.path.exists(file_name):
+    #     raise RuntimeError("Could not find file: %s" % file_name)
 
     # Get reader
     if file_format == 'vtk':

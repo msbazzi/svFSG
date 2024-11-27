@@ -38,8 +38,8 @@ Add mesh: wall {
    Add face: wall_outer {
       Face file path:  /home/bazzi/repo/svFSG/mesh/solid-mesh-complete/mesh-surfaces/wall_outer.vtp
    }
-  #Number of variable wall properties: 98
-  #Variable wall properties file path:  /home/bazzi/repo/svFSG/mesh/solid-mesh-complete/mesh-complete.mesh.vtu
+  Number of variable wall properties: 98
+  Variable wall properties file path:  /home/bazzi/repo/svFSG/mesh/solid-mesh-complete/mesh-complete.mesh.vtu
 }
 
 #----------------------------------------------------------------
@@ -51,8 +51,6 @@ Add equation: struct {
    Tolerance: 1e-4
 
    Constitutive model: mm
-   Poisson ratio: 0.4
-   Elasticity modulus: 5e6
    #Dilational penalty model: M94
    Penalty parameter: 500000000.0
    Density: 1.0

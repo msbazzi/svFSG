@@ -198,11 +198,11 @@ class Vessel():
         self.saveSolid()
         self.runSolid()
 
-        with open(self.resultDir+'/histor.dat') as f:
-            if 'NaN' in f.read():
-                print("Simulation has NaN! Reducing omega.", file=sys.stderr)
-                self.appendReducedResult()
-                return
+        # with open(self.resultDir+'/histor.dat') as f:
+        #     if 'NaN' in f.read():
+        #         print("Simulation has NaN! Reducing omega.", file=sys.stderr)
+        #         self.appendReducedResult()
+        #         return
 
         self.updateSolidResults()
         self.appendSolidResult()
@@ -492,8 +492,8 @@ class Vessel():
         numCellsVol = fluidVol.GetNumberOfCells()
 
         # Need to order ids to match globalNodeID order
-        fluidVol.GetPointData().AddArray(pv.convert_array(np.linspace(1,numPtsVol,numPtsVol).astype(int),name="GlobalNodeID"))
-        fluidVol.GetCellData().AddArray(pv.convert_array(np.linspace(1,numCellsVol,numCellsVol).astype(int),name="GlobalElementID"))
+        fluidVol.GetPointData().AddArray(pv.convert_array(np.linspace(1,numPtsVol,numPtsVol).astype(np.int32),name="GlobalNodeID"))
+        fluidVol.GetCellData().AddArray(pv.convert_array(np.linspace(1,numCellsVol,numCellsVol).astype(np.int32),name="GlobalElementID"))
 
         save_data(self.prefix + 'mesh/lumen-mesh-complete/mesh-complete.mesh.vtu',fluidVol)
         innerVolSurf = pv.wrap(fluidVol).extract_surface()
@@ -1595,15 +1595,15 @@ class Vessel():
         vol.dimensions = [self.numRad+1, self.numCirc+1, self.numLen+1]
 
         numCells = vol.GetNumberOfCells()
-        vol.GetPointData().AddArray(pv.convert_array((proximalIds).astype(int),name="ProximalRegionID"))
-        vol.GetPointData().AddArray(pv.convert_array((distalIds).astype(int),name="DistalRegionID"))
-        vol.GetPointData().AddArray(pv.convert_array((innerIds).astype(int),name="InnerRegionID"))
-        vol.GetPointData().AddArray(pv.convert_array((outerIds).astype(int),name="OuterRegionID"))
-        vol.GetPointData().AddArray(pv.convert_array((structureIds).astype(int),name="StructureID"))
-        vol.GetCellData().AddArray(pv.convert_array(np.linspace(1,numCells,numCells).astype(int),name="GlobalElementID"))
-        vol.GetCellData().AddArray(pv.convert_array(np.linspace(1,numCells,numCells).astype(int),name="CellStructureID"))
+        vol.GetPointData().AddArray(pv.convert_array((proximalIds).astype(np.int32),name="ProximalRegionID"))
+        vol.GetPointData().AddArray(pv.convert_array((distalIds).astype(np.int32),name="DistalRegionID"))
+        vol.GetPointData().AddArray(pv.convert_array((innerIds).astype(np.int32),name="InnerRegionID"))
+        vol.GetPointData().AddArray(pv.convert_array((outerIds).astype(np.int32),name="OuterRegionID"))
+        vol.GetPointData().AddArray(pv.convert_array((structureIds).astype(np.int32),name="StructureID"))
+        vol.GetCellData().AddArray(pv.convert_array(np.linspace(1,numCells,numCells).astype(np.int32),name="GlobalElementID"))
+        vol.GetCellData().AddArray(pv.convert_array(np.linspace(1,numCells,numCells).astype(np.int32),name="CellStructureID"))
         vol.GetCellData().AddArray(pv.convert_array(e_ma.astype(float),name="varWallProps"))
-        vol.GetPointData().AddArray(pv.convert_array((sliceIds).astype(int),name="sliceIds"))
+        vol.GetPointData().AddArray(pv.convert_array((sliceIds).astype(np.int32),name="sliceIds"))
 
         #Exchange these to gauss point quantities
         #Matrices/arrays
@@ -1633,15 +1633,15 @@ class Vessel():
         vol.GetCellData().AddArray(pv.convert_array(e_t.astype(float),name="e_t"))
         vol.GetCellData().AddArray(pv.convert_array(e_z.astype(float),name="e_z"))
         vol.GetCellData().AddArray(pv.convert_array(e_ma.astype(float),name="material_global"))
-        vol.GetCellData().AddArray(pv.convert_array(fluidStressQueryIds.astype(int),name="fluidStressQueryID"))
-        vol.GetCellData().AddArray(pv.convert_array(solidStressQueryIds.astype(int),name="solidStressQueryID"))
-        vol.GetCellData().AddArray(pv.convert_array(simulateIds.astype(int),name="Simulate"))
+        vol.GetCellData().AddArray(pv.convert_array(fluidStressQueryIds.astype(np.int32),name="fluidStressQueryID"))
+        vol.GetCellData().AddArray(pv.convert_array(solidStressQueryIds.astype(np.int32),name="solidStressQueryID"))
+        vol.GetCellData().AddArray(pv.convert_array(simulateIds.astype(np.int32),name="Simulate"))
         vol.GetCellData().AddArray(pv.convert_array(aneurysmValue.astype(float),name="aneurysmValue"))
         vol.GetCellData().AddArray(pv.convert_array(tevgValue.astype(float),name="tevgValue"))
         vol = vol.cast_to_unstructured_grid()
         vol = clean(vol, tolerance=1e-10)
         numPts = vol.GetNumberOfPoints()
-        vol.GetPointData().AddArray(pv.convert_array(np.linspace(1,numPts,numPts).astype(int),name="GlobalNodeID"))
+        vol.GetPointData().AddArray(pv.convert_array(np.linspace(1,numPts,numPts).astype(np.int32),name="GlobalNodeID"))
         vol.GetPointData().AddArray(pv.convert_array(np.tile(np.zeros(3),(numPts,1)).astype(float),name="displacements"))
         vol.GetPointData().AddArray(pv.convert_array(np.tile(np.zeros(3),(numPts,1)).astype(float),name="residual_curr"))
         vol.GetPointData().AddArray(pv.convert_array(np.tile(np.zeros(3),(numPts,1)).astype(float),name="residual_prev"))
@@ -1880,15 +1880,15 @@ class Vessel():
         vol.dimensions = [self.numRad+1, self.numCirc+1, self.numLen+1]
 
         numCells = vol.GetNumberOfCells()
-        vol.GetPointData().AddArray(pv.convert_array((proximalIds).astype(int),name="ProximalRegionID"))
-        vol.GetPointData().AddArray(pv.convert_array((distalIds).astype(int),name="DistalRegionID"))
-        vol.GetPointData().AddArray(pv.convert_array((innerIds).astype(int),name="InnerRegionID"))
-        vol.GetPointData().AddArray(pv.convert_array((outerIds).astype(int),name="OuterRegionID"))
-        vol.GetPointData().AddArray(pv.convert_array((structureIds).astype(int),name="StructureID"))
-        vol.GetCellData().AddArray(pv.convert_array(np.linspace(1,numCells,numCells).astype(int),name="GlobalElementID"))
-        vol.GetCellData().AddArray(pv.convert_array(np.linspace(1,numCells,numCells).astype(int),name="CellStructureID"))
+        vol.GetPointData().AddArray(pv.convert_array((proximalIds).astype(np.int32),name="ProximalRegionID"))
+        vol.GetPointData().AddArray(pv.convert_array((distalIds).astype(np.int32),name="DistalRegionID"))
+        vol.GetPointData().AddArray(pv.convert_array((innerIds).astype(np.int32),name="InnerRegionID"))
+        vol.GetPointData().AddArray(pv.convert_array((outerIds).astype(np.int32),name="OuterRegionID"))
+        vol.GetPointData().AddArray(pv.convert_array((structureIds).astype(np.int32),name="StructureID"))
+        vol.GetCellData().AddArray(pv.convert_array(np.linspace(1,numCells,numCells).astype(np.int32),name="GlobalElementID"))
+        vol.GetCellData().AddArray(pv.convert_array(np.linspace(1,numCells,numCells).astype(np.int32),name="CellStructureID"))
         vol.GetCellData().AddArray(pv.convert_array(e_ma.astype(float),name="varWallProps"))
-        vol.GetPointData().AddArray(pv.convert_array((sliceIds).astype(int),name="sliceIds"))
+        vol.GetPointData().AddArray(pv.convert_array((sliceIds).astype(np.int32),name="sliceIds"))
 
         #Exchange these to gauss point quantities
         #Matrices/arrays
@@ -1918,15 +1918,15 @@ class Vessel():
         vol.GetCellData().AddArray(pv.convert_array(e_t.astype(float),name="e_t"))
         vol.GetCellData().AddArray(pv.convert_array(e_z.astype(float),name="e_z"))
         vol.GetCellData().AddArray(pv.convert_array(e_ma.astype(float),name="material_global"))
-        vol.GetCellData().AddArray(pv.convert_array(fluidStressQueryIds.astype(int),name="fluidStressQueryID"))
-        vol.GetCellData().AddArray(pv.convert_array(solidStressQueryIds.astype(int),name="solidStressQueryID"))
-        vol.GetCellData().AddArray(pv.convert_array(simulateIds.astype(int),name="Simulate"))
+        vol.GetCellData().AddArray(pv.convert_array(fluidStressQueryIds.astype(np.int32),name="fluidStressQueryID"))
+        vol.GetCellData().AddArray(pv.convert_array(solidStressQueryIds.astype(np.int32),name="solidStressQueryID"))
+        vol.GetCellData().AddArray(pv.convert_array(simulateIds.astype(np.int32),name="Simulate"))
         vol.GetCellData().AddArray(pv.convert_array(aneurysmValue.astype(float),name="aneurysmValue"))
         vol.GetCellData().AddArray(pv.convert_array(tevgValue.astype(float),name="tevgValue"))
         vol = vol.cast_to_unstructured_grid()
         vol = clean(vol, tolerance=1e-10)
         numPts = vol.GetNumberOfPoints()
-        vol.GetPointData().AddArray(pv.convert_array(np.linspace(1,numPts,numPts).astype(int),name="GlobalNodeID"))
+        vol.GetPointData().AddArray(pv.convert_array(np.linspace(1,numPts,numPts).astype(np.int32),name="GlobalNodeID"))
         vol.GetPointData().AddArray(pv.convert_array(np.tile(np.zeros(3),(numPts,1)).astype(float),name="displacements"))
         vol.GetPointData().AddArray(pv.convert_array(np.tile(np.zeros(3),(numPts,1)).astype(float),name="residual_curr"))
         vol.GetPointData().AddArray(pv.convert_array(np.tile(np.zeros(3),(numPts,1)).astype(float),name="residual_prev"))
@@ -1944,7 +1944,7 @@ class Vessel():
         numQuad = self.numCirc // 4 + 1
         numPerim = self.numCirc // 4
         quadFrac = 0.1
-        numTrans = 40
+        numTrans = 10
         points = []
 
         inIds = np.zeros((numQuad**2 + (numTrans-1)*self.numCirc)*(self.numLen+1))
@@ -2068,9 +2068,9 @@ class Vessel():
 
         vol = pv.UnstructuredGrid(np.array(cellArray), np.array(cellTypes), np.array(points))
 
-        vol.GetPointData().AddArray(pv.convert_array((inIds).astype(int),name="ProximalRegionID"))
-        vol.GetPointData().AddArray(pv.convert_array((outIds).astype(int),name="DistalRegionID"))
-        vol.GetPointData().AddArray(pv.convert_array((wallIds).astype(int),name="OuterRegionID"))
+        vol.GetPointData().AddArray(pv.convert_array((inIds).astype(np.int32),name="ProximalRegionID"))
+        vol.GetPointData().AddArray(pv.convert_array((outIds).astype(np.int32),name="DistalRegionID"))
+        vol.GetPointData().AddArray(pv.convert_array((wallIds).astype(np.int32),name="OuterRegionID"))
 
         numPts = vol.GetNumberOfPoints()
         vol.GetPointData().AddArray(pv.convert_array(np.tile(np.zeros(3),(numPts,1)).astype(float),name="Velocity"))

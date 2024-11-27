@@ -365,3 +365,15 @@ ERROR: Too many { in FolderSimulationInputFiles/solid_aniso.mfs
 ERROR occurred, see below for more explanation
 ERROR: Too many { in FolderSimulationInputFiles/solid_aniso.mfs
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ERROR occurred, see below for more explanation
+ERROR: File <FolderSimulationInputFiles/input_fluid.xml> does not exist or can not be opened
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ERROR occurred, see below for more explanation
+ERROR: Too many { in FolderSimulationInputFiles/solid_mm.mfs
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ERROR occurred, see below for more explanation
+ERROR: Too many { in FolderSimulationInputFiles/input_fluid.mfs
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
