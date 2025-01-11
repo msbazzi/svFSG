@@ -21,21 +21,21 @@
 
 
 <Add_mesh name="wall" >
-  <Mesh_file_path> /home/bazzi/repo/svFSG/pipe/wall-mesh-complete/mesh-complete.mesh.vtu  </Mesh_file_path>
+  <Mesh_file_path> /home/bazzi/repo/svFSG/mesh/solid-mesh-complete/mesh-complete.mesh.vtu  </Mesh_file_path>
   <Add_face name="wall_inlet">
-      <Face_file_path> /home/bazzi/repo/svFSG/pipe/wall-mesh-complete/mesh-surfaces/wall_inlet.vtp </Face_file_path>
+      <Face_file_path> /home/bazzi/repo/svFSG/mesh/solid-mesh-complete/mesh-surfaces/wall_inlet.vtp </Face_file_path>
   </Add_face>
   <Add_face name="wall_outlet">
-      <Face_file_path> /home/bazzi/repo/svFSG/pipe/wall-mesh-complete/mesh-surfaces/wall_outlet.vtp </Face_file_path>
+      <Face_file_path> /home/bazzi/repo/svFSG/mesh/solid-mesh-complete/mesh-surfaces/wall_outlet.vtp </Face_file_path>
   </Add_face>
   <Add_face name="wall_inner">
-      <Face_file_path> /home/bazzi/repo/svFSG/pipe/wall-mesh-complete/mesh-surfaces/wall_inner.vtp </Face_file_path>
+      <Face_file_path> /home/bazzi/repo/svFSG/mesh/solid-mesh-complete/mesh-surfaces/wall_inner.vtp </Face_file_path>
   </Add_face>
   <Add_face name="wall_outer">
-      <Face_file_path> /home/bazzi/repo/svFSG/pipe/wall-mesh-complete/mesh-surfaces/wall_outer.vtp </Face_file_path>
+      <Face_file_path> /home/bazzi/repo/svFSG/mesh/solid-mesh-complete/mesh-surfaces/wall_outer.vtp </Face_file_path>
   </Add_face>
-  <Number_variable_wall_properties> 9 </Number_variable_wall_properties>
-   <Variable_wall_properties_file_path> /home/bazzi/repo/svFSG/pipe/wall-mesh-complete/mesh-complete.mesh.vtu </Variable_wall_properties_file_path>
+  <Number_variable_wall_properties> 98 </Number_variable_wall_properties>
+   <Variable_wall_properties_file_path> /home/bazzi/repo/svFSG/mesh/solid-mesh-complete/mesh-complete.mesh.vtu </Variable_wall_properties_file_path>
 </Add_mesh>
 
 
@@ -48,6 +48,7 @@
    <Density> 1.0 </Density>                           <!-- g/cm^3 -->
    <Elasticity_modulus> 1.0e5 </Elasticity_modulus>   <!-- dyne/cm^2 -->
    <Poisson_ratio> 0.483333 </Poisson_ratio>
+    <Mass_damping>10000000</Mass_damping>
    <Constitutive_model type="mix"> </Constitutive_model> 
    <Dilational_penalty_model> ST91 </Dilational_penalty_model>
    <Viscosity model="Constant" >
@@ -75,6 +76,12 @@
       <Krylov_space_dimension> 50 </Krylov_space_dimension>
    </LS>
 
+   <Add_BC name="wall_inner" > 
+      <Type> Neu </Type> 
+      <Time_dependence> Spatial </Time_dependence> 
+      <Spatial_values_file_path> /home/bazzi/repo/svFSG/mesh/solid-mesh-complete/mesh-surfaces/wall_inner.vtp </Spatial_values_file_path> 
+   </Add_BC> 
+   
    <Add_BC name="wall_inlet" > 
       <Type> Dir </Type> 
       <Value> 0.0 </Value> 
